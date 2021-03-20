@@ -21,9 +21,11 @@ public class UserService extends BaseService<User, Integer> {
     private UserMapper userMapper;
 
     public  UserModel userLogin(String userName, String userPwd){
+
         checkLoginParams(userName, userPwd);
 
         User user = userMapper.queryUserByName(userName);
+
         AssertUtil.isTrue(user == null,"用户姓名不存在");
 
         checkUserPwd(userPwd, user.getUserPwd());

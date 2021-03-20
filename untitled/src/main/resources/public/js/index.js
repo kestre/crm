@@ -16,7 +16,7 @@ layui.use(['form','jquery'], function () {
             success:function (result){
                 if(result.code == 200){
                     layer.msg("登录成功！",function (){
-                        if($("#remeberMe").prop("checked")){
+                        if($("#rememberMe").prop("checked")){
                             $.cookie("userId",result.result.userIdStr, {expires:7});
                             $.cookie("userName",result.result.userName, {expires:7});
                             $.cookie("trueName",result.result.trueName, {expires:7});
