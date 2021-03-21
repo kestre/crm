@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 @Controller
-@RequestMapping("sale_chance")
+@RequestMapping("saleChance")
 public class SaleChanceController extends BaseController {
 
     @Resource
@@ -20,6 +20,12 @@ public class SaleChanceController extends BaseController {
     @RequestMapping("list")
     @ResponseBody
     public Map<String, Object> querySaleChanceByParams(SaleChanceQuery saleChanceQuery){
+
         return saleChanceService.querySaleChanceByParams(saleChanceQuery);
+    }
+
+    @RequestMapping("index")
+    public String index(){
+        return "saleChance/saleChance";
     }
 }
