@@ -11,13 +11,13 @@ public class SaleChance {
 
     private String customerName;
 
-    private Integer cgil;
+    private Integer cgjl;
 
     private String overview;
 
-    private String llinkMan;
+    private String linkMan;
 
-    private String linckPhnoe;
+    private String linkPhone;
 
     private String description;
 
@@ -66,12 +66,12 @@ public class SaleChance {
         this.customerName = customerName == null ? null : customerName.trim();
     }
 
-    public Integer getCgil() {
-        return cgil;
+    public Integer getCgjl() {
+        return cgjl;
     }
 
-    public void setCgil(Integer cgil) {
-        this.cgil = cgil;
+    public void setCgjl(Integer cgjl) {
+        this.cgjl = cgjl;
     }
 
     public String getOverview() {
@@ -82,20 +82,20 @@ public class SaleChance {
         this.overview = overview == null ? null : overview.trim();
     }
 
-    public String getLlinkMan() {
-        return llinkMan;
+    public String getLinkMan() {
+        return linkMan;
     }
 
-    public void setLlinkMan(String llinkMan) {
-        this.llinkMan = llinkMan == null ? null : llinkMan.trim();
+    public void setLinkMan(String linkMan) {
+        this.linkMan = linkMan == null ? null : linkMan.trim();
     }
 
-    public String getLinckPhnoe() {
-        return linckPhnoe;
+    public String getLinkPhone() {
+        return linkPhone;
     }
 
-    public void setLinckPhnoe(String linckPhnoe) {
-        this.linckPhnoe = linckPhnoe == null ? null : linckPhnoe.trim();
+    public void setLinkPhone(String linkPhone) {
+        this.linkPhone = linkPhone == null ? null : linkPhone.trim();
     }
 
     public String getDescription() {

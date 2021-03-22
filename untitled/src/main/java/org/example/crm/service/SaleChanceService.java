@@ -7,6 +7,8 @@ import org.example.crm.dao.SaleChanceMapper;
 import org.example.crm.query.SaleChanceQuery;
 import org.example.crm.vo.SaleChance;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -32,5 +34,13 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
         map.put("data", pageInfo.getList());
 
         return map;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void addSaleChance(SaleChance saleChance) {
+        checkSaleChanceParams(saleChance.getCustomerName(), saleChance.getLinkMan(), saleChance.getLinkPhone());
+    }
+
+    private void checkSaleChanceParams(String customerName, String linkMan, String linkPhone) {
     }
 }
