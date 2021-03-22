@@ -226,7 +226,7 @@
     create_man, assign_man, assign_time, state, dev_result, s.is_valid, s.create_date, s.update_date,
     u.user_name as uname
     from t_sale_chance s
-    inner join
+    left join
     t_user u
     on
     s.assign_man = u.id

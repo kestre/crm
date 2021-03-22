@@ -2,15 +2,21 @@ package org.example.crm.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.example.crm.base.BaseService;
 import org.example.crm.dao.SaleChanceMapper;
+import org.example.crm.enums.DevResult;
+import org.example.crm.enums.StateStatus;
 import org.example.crm.query.SaleChanceQuery;
+import org.example.crm.utils.AssertUtil;
+import org.example.crm.utils.PhoneUtil;
 import org.example.crm.vo.SaleChance;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,8 +45,29 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
     @Transactional(propagation = Propagation.REQUIRED)
     public void addSaleChance(SaleChance saleChance) {
         checkSaleChanceParams(saleChance.getCustomerName(), saleChance.getLinkMan(), saleChance.getLinkPhone());
+
+        saleChance.setIsValid(1);
+        saleChance.setCreateDate(new Date());
+        saleChance.setUpdateDate(new Date());
+
+        if(StringUtils.isBlank(saleChance.getAssignMan())) {
+            saleChance.setState(StateStatus.UNSTATE.getType());
+            saleChance.setAssignTime(null);
+            saleChance.setDevResult(DevResult.UNDEV.getStatus());
+        } else {
+            saleChance.setState(StateStatus.STATED.getType());
+            saleChance.setAssignTime(new Date());
+            saleChance.setDevResult(DevResult.DEVING.getStatus());
+        }
+
+        AssertUtil.isTrue(saleChanceMapper.insertSelective(saleChance) != 1, "添加失败！");
     }
 
     private void checkSaleChanceParams(String customerName, String linkMan, String linkPhone) {
+
+        AssertUtil.isTrue(StringUtils.isBlank(customerName), "客户名称不能为空！");
+        AssertUtil.isTrue(StringUtils.isBlank(linkMan), "联系人不能为空！");
+        AssertUtil.isTrue(StringUtils.isBlank(linkPhone), "联系号码不能为空！");
+        AssertUtil.isTrue(!PhoneUtil.isMobile(linkPhone), "联系号码格式不正确！");
     }
 }
