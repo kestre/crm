@@ -63,6 +63,42 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
         AssertUtil.isTrue(saleChanceMapper.insertSelective(saleChance) != 1, "添加失败！");
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateSaleChance(SaleChance saleChance) {
+
+        AssertUtil.isTrue(null == saleChance.getId(), "待更新记录不存在！");
+        SaleChance temp = saleChanceMapper.selectByPrimaryKey(saleChance.getId());
+        AssertUtil.isTrue(null == temp, "待更新记录不存在！");
+
+        checkSaleChanceParams(saleChance.getCustomerName(), saleChance.getLinkMan(), saleChance.getLinkPhone());
+
+        saleChance.setUpdateDate(new Date());
+
+        if(StringUtils.isBlank(temp.getAssignMan())){       //不存在
+            if(!StringUtils.isBlank(saleChance.getAssignMan())){        //存在
+                saleChance.setState(StateStatus.STATED.getType());
+                saleChance.setAssignTime(new Date());
+                saleChance.setDevResult(DevResult.DEVING.getStatus());
+            }
+        }else{
+            if(StringUtils.isBlank(saleChance.getAssignMan())){
+                saleChance.setState(StateStatus.UNSTATE.getType());
+                saleChance.setAssignTime(null);
+                saleChance.setDevResult(DevResult.UNDEV.getStatus());
+            } else {
+                if(!temp.getAssignMan().equals((saleChance.getAssignMan()))){
+                    saleChance.setAssignTime(new Date());
+                } else {
+                    saleChance.setAssignTime(temp.getAssignTime());
+                }
+            }
+        }
+
+        AssertUtil.isTrue(saleChanceMapper.updateByPrimaryKeySelective(saleChance) != 1, "更新失败！");
+
+    }
+
+    // 参数校验
     private void checkSaleChanceParams(String customerName, String linkMan, String linkPhone) {
 
         AssertUtil.isTrue(StringUtils.isBlank(customerName), "客户名称不能为空！");

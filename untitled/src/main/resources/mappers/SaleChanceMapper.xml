@@ -177,12 +177,12 @@
       <if test="createMan != null">
         create_man = #{createMan,jdbcType=VARCHAR},
       </if>
-      <if test="assignMan != null">
+<!--      <if test="assignMan != null">-->
         assign_man = #{assignMan,jdbcType=VARCHAR},
-      </if>
-      <if test="assignTime != null">
+<!--      </if>-->
+<!--      <if test="assignTime != null">-->
         assign_time = #{assignTime,jdbcType=TIMESTAMP},
-      </if>
+<!--      </if>-->
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
       </if>

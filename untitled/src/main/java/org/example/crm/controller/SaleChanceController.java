@@ -46,8 +46,18 @@ public class SaleChanceController extends BaseController {
         return success("添加成功！");
     }
 
+    @RequestMapping("updateSaleChance")
+    @ResponseBody
+    public ResultInfo updateSaleChance(SaleChance saleChance){
+
+        saleChanceService.updateSaleChance(saleChance);
+        return success("更新成功！");
+    }
+
     @RequestMapping("toSaleChance")
     public String toSaleChancePage(){
         return "saleChance/addAndUpdate";
     }
+
+
 }
