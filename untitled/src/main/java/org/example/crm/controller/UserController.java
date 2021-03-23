@@ -2,8 +2,8 @@ package org.example.crm.controller;
 
 import org.example.crm.base.BaseController;
 import org.example.crm.base.ResultInfo;
-import org.example.crm.exceptions.ParamsException;
 import org.example.crm.model.UserModel;
+import org.example.crm.query.UserQuery;
 import org.example.crm.service.UserService;
 import org.example.crm.utils.LoginUserUtil;
 import org.springframework.stereotype.Controller;
@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "user",method = RequestMethod.POST)
+//@RequestMapping(value = "user",method = RequestMethod.POST)
+@RequestMapping("user")
 public class UserController extends BaseController {
 
     @Resource
     private UserService userService;
 
-    @PostMapping("login")
+    @RequestMapping("login")
     @ResponseBody
     public ResultInfo userLogin(String userName, String userPwd){
 
@@ -35,7 +36,7 @@ public class UserController extends BaseController {
         return resultInfo;
     }
 
-    @PostMapping("updatePwd")
+    @RequestMapping("updatePwd")
     @ResponseBody
     public ResultInfo updateUserPassword(HttpServletRequest request,
                                          String oldPassword, String newPassword,String repeatPassword){
@@ -49,16 +50,28 @@ public class UserController extends BaseController {
         return resultInfo;
     }
 
-    @GetMapping("toPasswordPage")
+    @RequestMapping("toPasswordPage")
     public String toPasswordPage(){
 
         return "user/password";
     }
 
-    @PostMapping("queryAllSales")
+    @RequestMapping("queryAllSales")
     @ResponseBody
     public List<Map<String, Object>> queryAllSales(){
 
         return userService.queryAllSales();
+    }
+
+    @RequestMapping("list")
+    @ResponseBody
+    public Map<String, Object> selectByParams(UserQuery userQuery) {
+        return userService.queryByParamsForTable(userQuery);
+    }
+
+    @RequestMapping("index")
+    public String index(){
+
+        return "user/user";
     }
 }

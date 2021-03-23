@@ -7,18 +7,19 @@ layui.use(['table','layer'],function(){
      */
     var  tableIns = table.render({
         elem: '#userList',
-        url : 'user/userList',
+        url : 'user/list',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
         limit : 10,
+        // 表格头部工具栏
         toolbar: "#toolbarDemo",
-        id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
             {field: "id", title:'编号',fixed:"true", width:80},
             {field: 'userName', title: '用户名', minWidth:50, align:"center"},
+            {field: 'trueName', title: '真实姓名', align:'center'},
             {field: 'email', title: '用户邮箱', minWidth:100, align:'center'},
             {field: 'phone', title: '用户电话', minWidth:100, align:'center'},
             {title: '身份', align:'center',minWidth:200, templet:
@@ -30,7 +31,6 @@ layui.use(['table','layer'],function(){
                     return roleNameBtn;
                 }
             },
-            {field: 'trueName', title: '真实姓名', align:'center'},
             {field: 'createDate', title: '创建时间', align:'center',minWidth:100},
             {field: 'updateDate', title: '更新时间', align:'center',minWidth:100},
             {title: '操作', minWidth:150, templet:'#userListBar',fixed:"right",align:"center"}
