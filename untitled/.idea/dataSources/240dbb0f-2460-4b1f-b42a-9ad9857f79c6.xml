@@ -8,13 +8,13 @@
     </root>
     <schema id="2" parent="1" name="crm">
       <Current>1</Current>
-      <Collation>latin1_swedish_ci</Collation>
+      <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="3" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="4" parent="1" name="mysql">
-      <Collation>latin1_swedish_ci</Collation>
+      <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="5" parent="1" name="performance_schema">
       <Collation>utf8_general_ci</Collation>
@@ -1059,13 +1059,23 @@
       <ObjectGrants>ALL PRIVILEGES!
 </ObjectGrants>
     </user>
-    <table id="336" parent="2" name="t_cus_dev_plan"/>
-    <table id="337" parent="2" name="t_module"/>
-    <table id="338" parent="2" name="t_permission"/>
-    <table id="339" parent="2" name="t_role"/>
+    <table id="336" parent="2" name="t_cus_dev_plan">
+      <Collation>latin1_swedish_ci</Collation>
+    </table>
+    <table id="337" parent="2" name="t_module">
+      <Collation>latin1_swedish_ci</Collation>
+    </table>
+    <table id="338" parent="2" name="t_permission">
+      <Collation>latin1_swedish_ci</Collation>
+    </table>
+    <table id="339" parent="2" name="t_role">
+      <Collation>latin1_swedish_ci</Collation>
+    </table>
     <table id="340" parent="2" name="t_sale_chance"/>
     <table id="341" parent="2" name="t_user"/>
-    <table id="342" parent="2" name="t_user_role"/>
+    <table id="342" parent="2" name="t_user_role">
+      <Collation>latin1_swedish_ci</Collation>
+    </table>
     <column id="343" parent="336" name="id">
       <Position>1</Position>
       <Comment>id</Comment>
@@ -1263,11 +1273,13 @@
       <Comment>角色名</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
+      <Collation>utf8_general_mysql500_ci</Collation>
     </column>
-    <column id="380" parent="339" name="role_remarker">
+    <column id="380" parent="339" name="role_remark">
       <Position>3</Position>
       <Comment>角色备注</Comment>
       <DataType>varchar(100)|0s</DataType>
+      <Collation>utf8_general_ci</Collation>
     </column>
     <column id="381" parent="339" name="is_valid">
       <Position>4</Position>
@@ -1306,7 +1318,7 @@
       <Comment>客户名称</Comment>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="388" parent="340" name="cgil">
+    <column id="388" parent="340" name="cgjl">
       <Position>4</Position>
       <Comment>成功几率</Comment>
       <DataType>int(11)|0s</DataType>
@@ -1316,12 +1328,12 @@
       <Comment>概要</Comment>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="390" parent="340" name="Llink_man">
+    <column id="390" parent="340" name="link_man">
       <Position>6</Position>
       <Comment>联系人</Comment>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="391" parent="340" name="linck_phnoe">
+    <column id="391" parent="340" name="link_phone">
       <Position>7</Position>
       <Comment>手机号码</Comment>
       <DataType>varchar(255)|0s</DataType>

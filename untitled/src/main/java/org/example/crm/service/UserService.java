@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService extends BaseService<User, Integer> {
@@ -74,5 +76,9 @@ public class UserService extends BaseService<User, Integer> {
     private void checkLoginParams(String userName, String userPwd){
         AssertUtil.isTrue(StringUtils.isBlank(userName), "用户姓名不能为空");
         AssertUtil.isTrue(StringUtils.isBlank(userPwd), "用户密码不能为空");
+    }
+    //查询所有的销售人员
+    public List<Map<String, Object>> queryAllSales(){
+        return userMapper.queryAllSales();
     }
 }

@@ -145,7 +145,6 @@ layui.use(['table','layer'],function(){
 
     // 表单右侧工具栏
     table.on('tool(saleChances)', function(obj){
-        // console.log("obj", obj);
         switch(obj.event){
             // 修改事件
             case 'edit':
@@ -161,7 +160,7 @@ layui.use(['table','layer'],function(){
                     $.post(
                         "saleChance/deleteSaleChance",
                         {
-                            ids: obj.data.id
+                            id: obj.data.id
                         },
                         function (data) {
                             if (data.code == 200) {

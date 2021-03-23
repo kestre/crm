@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "user",method = RequestMethod.POST)
@@ -51,5 +53,12 @@ public class UserController extends BaseController {
     public String toPasswordPage(){
 
         return "user/password";
+    }
+
+    @PostMapping("queryAllSales")
+    @ResponseBody
+    public List<Map<String, Object>> queryAllSales(){
+
+        return userService.queryAllSales();
     }
 }

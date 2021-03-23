@@ -2,27 +2,24 @@ layui.use(['form', 'layer'], function () {
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
-
-    // 渲染指派人下拉框
-    let assignMan = $("#otherAssignMan").val();
-    // 选择修改页面时，默认选中原始数据的指派人
-    renderAssignMan(assignMan);
-    function renderAssignMan(assignMan) {
-        $.post(
-            "saleChance/getAssignMan",
-            {},
-            function (data) {
-                $.each(data.result, function (index, element) {
-                    if (element.id == assignMan) {
-                        $("#assignMan").append(new Option(element.userName, element.id, false,true));
-                    } else {
-                        $("#assignMan").append(new Option(element.userName, element.id));
-                    }
-                });
-                form.render("select");
-            }
-        );
-    }
+    
+    $.post(
+        crm + "/user/queryAllSales",
+        {},
+        function (data) {
+            $.each(data, function (index, element) {
+                // 渲染指派人下拉框
+                let assignMan = $("#otherAssignMan").val();
+                if (element.id == assignMan) {
+                    $("#assignMan").append(new Option(element.uname, element.id, false,true));
+                } else {
+                    $("#assignMan").append(new Option(element.uname, element.id));
+                }
+            });
+            // 必须重新渲染下拉框
+            form.render("select");
+        }
+    );
 
     // 点击取消按钮时关闭当前弹出层
     $("#closeBtn").click(function () {
@@ -42,14 +39,12 @@ layui.use(['form', 'layer'], function () {
             time: false
         });
 
-        let url = '';
+        let url = crm + "/saleChance/addSaleChance";
+        let saleChanceId = $("[name='id']").val();
 
-        if ($("[name='id']").val() == null || $("[name='id']").val() == '') {
-            // 新增
-            url += "saleChance/addSaleChance";
-        } else {
-            // 修改
-            url += "saleChance/updateSaleChance";
+        if (saleChanceId != null && saleChanceId != '') {
+
+            url = crm + "/saleChance/updateSaleChance";
         }
 
         // 发送请求

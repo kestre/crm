@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -55,7 +54,13 @@ public class SaleChanceController extends BaseController {
     }
 
     @RequestMapping("toSaleChance")
-    public String toSaleChancePage(){
+    public String toSaleChancePage(Integer id, HttpServletRequest request){
+        if( id != null) {
+            SaleChance saleChance = saleChanceService.selectByPrimaryKey(id);
+
+            request.setAttribute("saleChance", saleChance);
+        }
+
         return "saleChance/addAndUpdate";
     }
 
