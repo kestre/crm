@@ -2,9 +2,11 @@ package org.example.crm.controller;
 
 import org.example.crm.base.BaseController;
 import org.example.crm.base.ResultInfo;
+import org.example.crm.enums.StateStatus;
 import org.example.crm.query.SaleChanceQuery;
 import org.example.crm.service.SaleChanceService;
 import org.example.crm.utils.CookieUtil;
+import org.example.crm.utils.LoginUserUtil;
 import org.example.crm.vo.SaleChance;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +23,18 @@ public class SaleChanceController extends BaseController {
     @Resource
     private SaleChanceService saleChanceService;
 
+    //      flag = 1 查询客户开发计划
+    //      flag = null 查询营销机会数据
     @RequestMapping("list")
     @ResponseBody
-    public Map<String, Object> querySaleChanceByParams(SaleChanceQuery saleChanceQuery){
+    public Map<String, Object> querySaleChanceByParams(SaleChanceQuery saleChanceQuery, Integer flag,
+                                                       HttpServletRequest request) {
 
+        if(flag != null && flag == 1){
+            saleChanceQuery.setState(StateStatus.STATED.getType());
+            Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
+            saleChanceQuery.setAssignMan(userId);
+        }
         return saleChanceService.querySaleChanceByParams(saleChanceQuery);
     }
 

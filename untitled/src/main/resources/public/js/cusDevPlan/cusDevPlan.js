@@ -8,7 +8,7 @@ layui.use(['table','layer'],function() {
      */
     var tableIns = table.render({
         elem: '#cusDevPlanList', // 表格绑定的ID
-        url : 'cusDevPlan/cusDevPlanList?flag=1', // 访问数据的地址
+        url : 'saleChance/list?flag=1', // 访问数据的地址
         cellMinWidth : 95,
         page : true, // 开启分页
         height : "full-125",
@@ -29,8 +29,6 @@ layui.use(['table','layer'],function() {
             {field: 'createMan', title: '创建人', align:'center'},
             {field: 'createDate', title: '创建时间', align:'center'},
             {field: 'updateDate', title: '修改时间', align:'center'},
-            {field: 'userName', title: '指派人', align:'center'},
-            {field: 'assignTime', title: '分配时间', align:'center'},
             {field: 'devResult', title: '开发状态', fixed:'right',templet:function (d) {
                 return formatterDevResult(d.devResult);
             }},

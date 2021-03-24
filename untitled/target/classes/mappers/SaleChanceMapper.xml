@@ -241,6 +241,12 @@
       <if test="state != null">
         and s.state = #{state}
       </if>
+      <if test="devResult != null and devResult != ''">
+        and s.dev_result = #{devResult}
+      </if>
+      <if test="assignMan != null">
+        and s.assign_man = #{assignMan}
+      </if>
     </where>
   </select>
   <!--  批量删除-->
