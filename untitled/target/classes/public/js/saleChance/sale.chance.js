@@ -14,7 +14,7 @@ layui.use(['table','layer'],function(){
         height : "full-125",
         limit : 10,  //每页条数
         toolbar: "#toolbarDemo",
-        // id : "saleChanceListTable",
+        id : "saleChanceListTable",
         cols : [[
             {type: "checkbox", fixed:"center"},
             {field: "id", title:'编号', sort: true, fixed:"true"},
@@ -106,26 +106,28 @@ layui.use(['table','layer'],function(){
             // 批量删除事件
             case 'del':
                 // 获取被选中的数据
+                // let checkStatus = table.checkStatus("saleChanceListTable");
                 let checkStatus = table.checkStatus(obj.config.id);
+                // console.log(checkStatus.data);
                 if (checkStatus.data.length < 1) {
                     layer.msg("未选中任何数据", {icon: 5});
                 } else {
                     // 将选中的数据的id封装
                     let ids = "";
-                    $.each(checkStatus.data, function (index, id) {
+                    $.each(checkStatus.data, function (index, item) {
                         if (index == checkStatus.data.length - 1) {
-                            ids += "ids=" + id.id;
+                            ids += "ids=" + item.id;
                         }else {
-                            ids += "ids=" + id.id + "&";
+                            ids += "ids=" + item.id + "&";
                         }
                     });
                     layer.confirm('选中删除行数：<span style="color: orange">'+checkStatus.data.length+'</span><br/>', {
-                        btn: ['确定', '取消'], //按钮
                         icon: 3,
                         title: '营销机会管理 - 批量删除'
-                    }, function () {
+                    }, function (index) {
+                        layer.close(index);
                         $.post(
-                            "saleChance/deleteSaleChance?" + ids,
+                            "saleChance/delete?" + ids,
                             {},
                             function (data) {
                                 if (data.code == 200) {
