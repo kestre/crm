@@ -106,4 +106,10 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(linkPhone), "联系号码不能为空！");
         AssertUtil.isTrue(!PhoneUtil.isMobile(linkPhone), "联系号码格式不正确！");
     }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void deleteSaleChance(Integer[] ids) {
+        AssertUtil.isTrue(ids == null || ids.length < 1, "请选择！");
+        AssertUtil.isTrue(saleChanceMapper.deleteBatch(ids) != ids.length, "删除失败！");
+    }
 }

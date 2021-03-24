@@ -152,19 +152,19 @@ layui.use(['table','layer'],function(){
                 break;
             // 删除事件
             case 'del':
-                layer.confirm('确认删除该行销售机会记录？', {
-                    btn: ['确定','取消'], //按钮
+                layer.confirm('确认删除？', {
                     icon: 3,
                     title: '营销机会管理 - 单行删除'
-                }, function(){
+                }, function(index){
+                    layer.close(index);
                     $.post(
-                        "saleChance/deleteSaleChance",
+                        "saleChance/delete",
                         {
-                            id: obj.data.id
+                            ids: obj.data.id
                         },
                         function (data) {
                             if (data.code == 200) {
-                                layer.msg(data.msg);
+                                layer.msg(data.msg,{icon: 6});
                                 // 重载表格
                                 tableIns.reload();
                             }else{

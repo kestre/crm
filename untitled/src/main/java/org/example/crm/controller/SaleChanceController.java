@@ -64,5 +64,11 @@ public class SaleChanceController extends BaseController {
         return "saleChance/addAndUpdate";
     }
 
+    @RequestMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteSaleChance(Integer[] ids) {
+        saleChanceService.deleteSaleChance(ids);
 
+        return success("删除成功！");
+    }
 }
