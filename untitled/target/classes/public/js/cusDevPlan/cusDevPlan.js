@@ -130,17 +130,17 @@ layui.use(['table','layer'],function() {
         switch(obj.event){
             // 开发
             case 'dev':
-                openSaleChanceDialog("客户开发计划 - 计划项数据开发", "cusDevPlan/toCusDevPlan?id=" + obj.data.id);
+                openCusDevOlanDialog("客户开发计划 - 计划项数据开发", "cusDevPlan/toCusDevPlan?id=" + obj.data.id);
                 break;
             // 详情
             case 'info':
-                openSaleChanceDialog("客户开发计划 - 计划项数据维护", "cusDevPlan/toCusDevPlan?id=" + obj.data.id);
+                openCusDevOlanDialog("客户开发计划 - 计划项数据维护", "cusDevPlan/toCusDevPlan?id=" + obj.data.id);
                 break;
         };
     });
 
     // 开启新窗口
-    function openSaleChanceDialog(title, url) {
+    function openCusDevOlanDialog(title, url) {
         title = "<h2>" + title + "</h2>";
         layui.layer.open({
             type: 2,
