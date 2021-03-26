@@ -13,7 +13,7 @@ layui.use(['table','layer'],function(){
     if (devResult == 0 || devResult == 1) {
         tableIns = table.render({
             elem: '#cusDevPlanList',
-            url : 'cusDevPlan/cusDevPlan?saleChanceId='+$("input[name='id']").val(),
+            url : 'cusDevPlan/list?saleChanceId='+$("[name='id']").val(),
             cellMinWidth : 95,
             page : true,
             height : "full-125",
@@ -35,7 +35,7 @@ layui.use(['table','layer'],function(){
     } else {
         tableIns = table.render({
             elem: '#cusDevPlanList',
-            url : 'cusDevPlan/cusDevPlan?saleChanceId='+$("input[name='id']").val(),
+            url : 'cusDevPlan/list?saleChanceId='+$("[name='id']").val(),
             cellMinWidth : 95,
             page : true,
             height : "full-125",

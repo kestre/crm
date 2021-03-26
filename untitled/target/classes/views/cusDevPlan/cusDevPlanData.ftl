@@ -42,7 +42,7 @@
 							<label class="layui-form-label">联系电话</label>
 							<div class="layui-input-block">
 								<input type="text" class="layui-input"
-									   lay-verify="phone" name="linkPhone" value="${(saleChance.linkPhone)!}" id="phone" readonly="readonly">
+									   lay-verify="phone" name="linkPhone" value="${(saleChance.linkPhone)!}" readonly="readonly">
 							</div>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 							<label class="layui-form-label">概要</label>
 							<div class="layui-input-block">
 								<input type="text" class="layui-input"
-									   name="overview" value="${(saleChance.overview)!}" id="phone"  readonly="readonly">
+									   name="overview" value="${(saleChance.overview)!}" readonly="readonly">
 							</div>
 						</div>
 						<div class="layui-col-xs6">
