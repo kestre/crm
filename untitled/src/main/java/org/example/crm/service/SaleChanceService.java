@@ -98,6 +98,23 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
 
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void deleteSaleChance(Integer[] ids) {
+        AssertUtil.isTrue(ids == null || ids.length < 1, "请选择！");
+        AssertUtil.isTrue(saleChanceMapper.deleteBatch(ids) != ids.length, "删除失败！");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateSaleChanceDevResult(Integer id, Integer devResult) {
+        AssertUtil.isTrue(id == null, "待更新记录不存在！");
+        SaleChance saleChance = saleChanceMapper.selectByPrimaryKey(id);
+        AssertUtil.isTrue(saleChance == null, "待更新记录不存在！");
+
+        saleChance.setDevResult(devResult);
+        AssertUtil.isTrue(saleChanceMapper.updateByPrimaryKeySelective(saleChance) != 1, "更新失败！");
+    }
+
+
     // 参数校验
     private void checkSaleChanceParams(String customerName, String linkMan, String linkPhone) {
 
@@ -105,11 +122,5 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(linkMan), "联系人不能为空！");
         AssertUtil.isTrue(StringUtils.isBlank(linkPhone), "联系号码不能为空！");
         AssertUtil.isTrue(!PhoneUtil.isMobile(linkPhone), "联系号码格式不正确！");
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void deleteSaleChance(Integer[] ids) {
-        AssertUtil.isTrue(ids == null || ids.length < 1, "请选择！");
-        AssertUtil.isTrue(saleChanceMapper.deleteBatch(ids) != ids.length, "删除失败！");
     }
 }

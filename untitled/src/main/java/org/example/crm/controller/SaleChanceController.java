@@ -9,6 +9,7 @@ import org.example.crm.utils.CookieUtil;
 import org.example.crm.utils.LoginUserUtil;
 import org.example.crm.vo.SaleChance;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -80,5 +81,14 @@ public class SaleChanceController extends BaseController {
         saleChanceService.deleteSaleChance(ids);
 
         return success("删除成功！");
+    }
+
+    @PostMapping("updateDevResult")
+    @ResponseBody
+    public ResultInfo updateDevResult(Integer id, Integer devResult) {
+
+        saleChanceService.updateSaleChanceDevResult(id, devResult);
+
+        return success("更新成功！");
     }
 }

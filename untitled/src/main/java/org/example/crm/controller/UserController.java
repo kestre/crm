@@ -6,6 +6,8 @@ import org.example.crm.model.UserModel;
 import org.example.crm.query.UserQuery;
 import org.example.crm.service.UserService;
 import org.example.crm.utils.LoginUserUtil;
+import org.example.crm.vo.SaleChance;
+import org.example.crm.vo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,4 +76,23 @@ public class UserController extends BaseController {
 
         return "user/user";
     }
+
+    @PostMapping("add")
+    @ResponseBody
+    public ResultInfo addUser(User user){
+        userService.addUser(user);
+        return success("添加成功！");
+    }
+
+    @RequestMapping("toAddUserPage")
+    public String toAddUserPage(){
+//        if( id != null) {
+//            SaleChance saleChance = saleChanceService.selectByPrimaryKey(id);
+//
+//            request.setAttribute("saleChance", saleChance);
+//        }
+
+        return "user/addAndUpdateUser";
+    }
+
 }

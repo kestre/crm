@@ -6,6 +6,7 @@ import org.example.crm.model.UserModel;
 import org.example.crm.utils.AssertUtil;
 import org.example.crm.utils.Md5Util;
 import org.apache.commons.lang3.StringUtils;
+import org.example.crm.utils.PhoneUtil;
 import org.example.crm.utils.UserIDBase64;
 import org.example.crm.vo.User;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -81,4 +83,27 @@ public class UserService extends BaseService<User, Integer> {
     public List<Map<String, Object>> queryAllSales(){
         return userMapper.queryAllSales();
     }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void addUser(User user) {
+        checkUserParams(user.getUserName(), user.getEmail(), user.getPhone());
+
+        user.setIsValid(1);
+        user.setCreateDate(new Date());
+        user.setUpdateDate(new Date());
+        user.setUserPwd(Md5Util.encode("123456"));
+
+        AssertUtil.isTrue(userMapper.insertSelective(user) != 1, "添加失败！");
+    }
+
+    private void checkUserParams(String userName, String email, String phone) {
+
+        AssertUtil.isTrue(StringUtils.isBlank(userName), "用户名不能为空！");
+        User temp = userMapper.queryUserByName(userName);
+        AssertUtil.isTrue(null != temp, "用户名已存在！");
+        AssertUtil.isTrue(StringUtils.isBlank(email), "用户邮箱不能为空！");
+        AssertUtil.isTrue(StringUtils.isBlank(phone), "手机号码不能为空！");
+        AssertUtil.isTrue(!PhoneUtil.isMobile(phone), "手机号码格式不正确！");
+    }
+
 }

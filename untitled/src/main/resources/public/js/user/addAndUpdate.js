@@ -23,7 +23,7 @@ layui.use(['form', 'layer'], function () {
         let url = '';
         if ($("[name='id']").val() == null || $("[name='id']").val() == '') {
             // 新增
-            url += "user/addUser";
+            url += "user/add";
         } else {
             // 修改
             url += "user/updateUser";

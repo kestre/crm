@@ -136,4 +136,17 @@
     and
         sale_chance_id = #{saleChanceId}
   </select>
+  <!--  批量删除-->
+  <update id="deleteBatch">
+    update
+    t_cus_dev_plan
+    set
+    is_valid = 0
+    where
+    id
+    in
+    <foreach collection="array" separator="," open="(" close=")" item="id">
+      #{id}
+    </foreach>
+  </update>
 </mapper>

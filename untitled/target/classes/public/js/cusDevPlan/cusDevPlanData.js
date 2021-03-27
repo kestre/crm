@@ -83,7 +83,7 @@ layui.use(['table','layer'],function(){
                         title: '客户开发计划 - 批量删除'
                     }, function () {
                         $.post(
-                            "cusDevPlan/deleteCusDevPlan?" + ids,
+                            "cusDevPlan/delete?" + ids,
                             {},
                             function (data) {
                                 if (data.code == 200) {
@@ -100,53 +100,11 @@ layui.use(['table','layer'],function(){
                 break;
             // 标记成功
             case 'success':
-                layer.confirm('确认将当前销售机会开发状态修改为<span style="color: orange">开发成功</span>', {
-                    btn: ['确定', '取消'], //按钮
-                    icon: 3,
-                    title: '客户开发计划 - 修改开发状态'
-                }, function () {
-                    $.post(
-                        "cusDevPlan/updateDevResult",
-                        {
-                            id: $("[name='id']").val(),
-                            devResult: '2'  // 2：开发成功
-                        },
-                        function (data) {
-                            if (data.code == 200) {
-                                layer.msg(data.msg);
-                                // 重载表格
-                                parent.location.reload("form");
-                            } else {
-                                layer.msg(data.msg, {icon: 5});
-                            }
-                        }
-                    );
-                });
+                updateSaleChanceDevResult(2);   //  2：开发成功
                 break;
             // 标记失败
             case 'failed':
-                layer.confirm('确认将当前销售机会开发状态修改为<span style="color: orange">开发失败</span>', {
-                    btn: ['确定', '取消'], //按钮
-                    icon: 3,
-                    title: '客户开发计划 - 修改开发状态'
-                }, function () {
-                    $.post(
-                        "cusDevPlan/updateDevResult",
-                        {
-                            id: $("[name='id']").val(),
-                            devResult: '3'  // 3：开发失败
-                        },
-                        function (data) {
-                            if (data.code == 200) {
-                                layer.msg(data.msg);
-                                // 重载表格
-                                parent.location.reload("form");
-                            } else {
-                                layer.msg(data.msg, {icon: 5});
-                            }
-                        }
-                    );
-                });
+                updateSaleChanceDevResult(3);   //  3：开发失败
                 break;
         };
     });
@@ -167,7 +125,7 @@ layui.use(['table','layer'],function(){
                     title: '客户开发计划 - 单行删除'
                 }, function(){
                     $.post(
-                        "cusDevPlan/deleteCusDevPlan",
+                        "cusDevPlan/delete",
                         {
                             ids: obj.data.id
                         },
@@ -201,7 +159,33 @@ layui.use(['table','layer'],function(){
             // 不允许窗口拉伸
             resize: false
         });
-
     }
 
+    //  更新开发状态
+    function updateSaleChanceDevResult(devResult) {
+
+        layer.confirm('确认操作？', {
+            btn: ['确定', '取消'], //按钮
+            icon: 3,
+            title: '客户开发计划 - 修改开发状态'
+        }, function () {
+            $.post(
+                "saleChance/updateDevResult",
+                {
+                    id: $("[name='id']").val(),
+                    devResult: devResult  //
+                },
+                function (data) {
+                    if (data.code == 200) {
+                        layer.msg(data.msg);
+                        layer.closeAll("iframe");
+                        // 重载表格
+                        parent.location.reload("form");
+                    } else {
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                }
+            );
+        });
+    }
 });

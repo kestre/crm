@@ -45,7 +45,7 @@ layui.use(['table','layer','form','laydate'],function(){
             url += "cusDevPlan/add";
         } else {
             // 修改
-            url += "cusDevPlan/updateCusDevPlan";
+            url += "cusDevPlan/update";
         }
 
         // console.log(data.field)

@@ -76,4 +76,13 @@ public class CusDevPlanController extends BaseController {
         request.setAttribute("cusDevPlan", cusDevPlan);
         return "cusDevPlan/addAndUpdate";
     }
+
+    @PostMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteCusDevPlan(Integer[] ids) {
+
+        cusDevPlanService.deleteCusDevPlan(ids);
+
+        return success("删除成功！");
+    }
 }

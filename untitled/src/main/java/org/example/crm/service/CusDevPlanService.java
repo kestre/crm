@@ -69,10 +69,19 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
         AssertUtil.isTrue(cusDevPlanMapper.updateByPrimaryKeySelective(cusDevPlan) != 1, "更新失败！");
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteCusDevPlan(Integer[] ids){
+
+        AssertUtil.isTrue(null == ids || ids.length < 1, "请选择！");
+
+        AssertUtil.isTrue(cusDevPlanMapper.deleteBatch(ids) != ids.length, "删除失败！");
+    }
+
     private void checkCusDevPlanParams(CusDevPlan cusDevPlan) {
         Integer Id = cusDevPlan.getSaleChanceId();
         AssertUtil.isTrue(Id == null || saleChanceMapper.selectByPrimaryKey(Id) == null, "数据异常！");
 
         AssertUtil.isTrue(StringUtils.isBlank(cusDevPlan.getPlanItem()), "计划项内容不能为空！");
     }
+
 }
