@@ -82,7 +82,7 @@ layui.use(['table','layer'],function(){
                         title: '用户管理 - 批量删除'
                     }, function () {
                         $.post(
-                            "user/deleteUsers?" + ids,
+                            "user/delete?" + ids,
                             {},
                             function (data) {
                                 if (data.code == 200) {
@@ -116,7 +116,7 @@ layui.use(['table','layer'],function(){
                     title: '用户管理 - 单行删除'
                 }, function(){
                     $.post(
-                        "user/deleteUsers",
+                        "user/delete",
                         {
                             ids: obj.data.id
                         },

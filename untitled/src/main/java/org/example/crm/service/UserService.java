@@ -86,7 +86,7 @@ public class UserService extends BaseService<User, Integer> {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void addUser(User user) {
-        checkUserParams(user.getUserName(), user.getEmail(), user.getPhone());
+        checkUserParams(user.getUserName(), user.getEmail(), user.getPhone(), user.getId());
 
         user.setIsValid(1);
         user.setCreateDate(new Date());
@@ -96,11 +96,36 @@ public class UserService extends BaseService<User, Integer> {
         AssertUtil.isTrue(userMapper.insertSelective(user) != 1, "添加失败！");
     }
 
-    private void checkUserParams(String userName, String email, String phone) {
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateUser(User user) {
+
+        AssertUtil.isTrue(null == user.getId(), "待更新记录不存在！");
+
+        User temp = userMapper.selectByPrimaryKey(user.getId());
+
+        AssertUtil.isTrue(null == temp, "待更新记录不存在！");
+        checkUserParams(user.getUserName(), user.getEmail(), user.getPhone(), user.getId());
+
+        user.setUpdateDate(new Date());
+
+        AssertUtil.isTrue(userMapper.updateByPrimaryKeySelective(user) != 1, "添加失败！");
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteUser(Integer[] ids){
+
+        AssertUtil.isTrue(null == ids || ids.length < 1, "请选择！");
+
+        AssertUtil.isTrue(userMapper.deleteBatch(ids) != ids.length, "删除失败！");
+    }
+
+    private void checkUserParams(String userName, String email, String phone, Integer userId) {
 
         AssertUtil.isTrue(StringUtils.isBlank(userName), "用户名不能为空！");
         User temp = userMapper.queryUserByName(userName);
-        AssertUtil.isTrue(null != temp, "用户名已存在！");
+
+        AssertUtil.isTrue(null != temp && !(temp.getId().equals(userId)), "用户名已存在！");
         AssertUtil.isTrue(StringUtils.isBlank(email), "用户邮箱不能为空！");
         AssertUtil.isTrue(StringUtils.isBlank(phone), "手机号码不能为空！");
         AssertUtil.isTrue(!PhoneUtil.isMobile(phone), "手机号码格式不正确！");

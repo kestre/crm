@@ -26,7 +26,7 @@ layui.use(['form', 'layer'], function () {
             url += "user/add";
         } else {
             // 修改
-            url += "user/updateUser";
+            url += "user/update";
         }
         // 发送请求
         $.post(

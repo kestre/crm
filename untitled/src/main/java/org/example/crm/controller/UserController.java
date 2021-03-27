@@ -84,13 +84,27 @@ public class UserController extends BaseController {
         return success("添加成功！");
     }
 
+    @PostMapping("update")
+    @ResponseBody
+    public ResultInfo updateUser(User user){
+        userService.updateUser(user);
+        return success("更新成功！");
+    }
+
+    @PostMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteUser(Integer[] ids){
+        userService.deleteUser(ids);
+        return success("删除成功！");
+    }
+
     @RequestMapping("toAddUserPage")
-    public String toAddUserPage(){
-//        if( id != null) {
-//            SaleChance saleChance = saleChanceService.selectByPrimaryKey(id);
-//
-//            request.setAttribute("saleChance", saleChance);
-//        }
+    public String toAddUserPage(Integer id, HttpServletRequest request){
+        if( id != null) {
+            User user = userService.selectByPrimaryKey(id);
+
+            request.setAttribute("user", user);
+        }
 
         return "user/addAndUpdateUser";
     }
