@@ -60,7 +60,7 @@ layui.use(['form', 'layer'], function () {
      */
     layui.formSelects.config("selectId", {
         type: "get",    // 请求方式
-        searchUrl: "role/findRoles?id=" + $("[name='id']").val(), // 请求地址
+        searchUrl: "role/queryAllRoles?id=" + $("[name='id']").val(), // 请求地址
         keyName: "roleName",    // 显示的文本
         keyVal: "id"    // 下拉框的val值
     });
