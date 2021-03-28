@@ -8,7 +8,7 @@ layui.use(['table','layer'],function() {
      */
     var  tableIns = table.render({
         elem: '#roles',
-        url : 'role/roleList',
+        url : 'role/list',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -19,13 +19,8 @@ layui.use(['table','layer'],function() {
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
             {field: "id", title:'编号',fixed:"true", width:80},
-            {
-                // 为角色名着色
-                field: 'roleName', title: '角色名', minWidth:150, align:"center", templet: function (d) {
-                    return '<span style="color: #FFB800;">' + d.roleName + '</span>';
-                }
-            },
-            {field: 'roleRemark', title: '角色备注', minWidth:100, align:'center'},
+            {field: 'roleName', title: '角色名', minWidth:150, align:"center"},
+            {field: 'roleRemarker', title: '角色备注', minWidth:100, align:'center'},
             {field: 'createDate', title: '创建时间', align:'center',minWidth:150},
             {field: 'updateDate', title: '更新时间', align:'center',minWidth:150},
             {title: '操作', minWidth:150, templet:'#roleBar',fixed:"right",align:"center"}
@@ -75,7 +70,7 @@ layui.use(['table','layer'],function() {
                         title: '角色管理 - 批量删除'
                     }, function () {
                         $.post(
-                            "role/deleteRole?" + ids,
+                            "role/delete?" + ids,
                             {},
                             function (data) {
                                 if (data.code == 200) {
@@ -110,7 +105,7 @@ layui.use(['table','layer'],function() {
             // 编辑
             case 'edit':
                 // 开启修改编辑窗口
-                openRoleDialog("角色管理 - 修改角色", "role/toAddAndUpdatePage?roleId=" + obj.data.id);
+                openRoleDialog("角色管理 - 修改角色", "role/toAddAndUpdatePage?id=" + obj.data.id);
                 break;
             // 删除
             case 'del':
@@ -120,7 +115,7 @@ layui.use(['table','layer'],function() {
                     title: '角色管理 - 单行删除'
                 }, function(){
                     $.post(
-                        "role/deleteRole",
+                        "role/delete",
                         {
                             ids: obj.data.id
                         },

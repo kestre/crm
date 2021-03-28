@@ -100,10 +100,11 @@ public class UserController extends BaseController {
 
     @RequestMapping("toAddUserPage")
     public String toAddUserPage(Integer id, HttpServletRequest request){
+
         if( id != null) {
             User user = userService.selectByPrimaryKey(id);
 
-            request.setAttribute("user", user);
+            request.setAttribute("userModel", user);
         }
 
         return "user/addAndUpdateUser";

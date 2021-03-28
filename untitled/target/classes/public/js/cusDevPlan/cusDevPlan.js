@@ -140,7 +140,7 @@ layui.use(['table','layer'],function() {
     });
 
     // 开启新窗口
-    function openCusDevOlanDialog(title, url) {
+    function openSaleChanceDialog(title, url) {
         title = "<h2>" + title + "</h2>";
         layui.layer.open({
             type: 2,

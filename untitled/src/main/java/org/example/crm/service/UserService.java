@@ -106,7 +106,7 @@ public class UserService extends BaseService<User, Integer> {
     }
 
     private void relationUserRole(Integer userId, String roleIds) {
-        Integer count = userRoleMapper.countUserRoleById(userId);
+        Integer count = userRoleMapper.countUserRoleByUserId(userId);
 
         if(count > 0) {
             AssertUtil.isTrue(userRoleMapper.deleteUserRoleByUserId(userId) != count, "用户角色分配失败！");
@@ -155,7 +155,7 @@ public class UserService extends BaseService<User, Integer> {
         AssertUtil.isTrue(userMapper.deleteBatch(ids) != ids.length, "删除失败！");
 
         for (Integer userId: ids) {
-            Integer count = userRoleMapper.countUserRoleById(userId);
+            Integer count = userRoleMapper.countUserRoleByUserId(userId);
 
             if (count > 0) {
                 AssertUtil.isTrue(userRoleMapper.deleteUserRoleByUserId(userId) != count, "删除失败！");

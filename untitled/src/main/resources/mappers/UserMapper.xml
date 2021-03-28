@@ -175,7 +175,7 @@
     set
     is_valid = 0
     where
-    id
+        id
     in
     <foreach collection="array" separator="," open="(" close=")" item="id">
       #{id}

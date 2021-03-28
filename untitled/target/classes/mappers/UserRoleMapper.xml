@@ -91,7 +91,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="countUserRoleById" parameterType="int" resultType="java.lang.Integer">
+  <select id="countUserRoleByUserId" parameterType="int" resultType="java.lang.Integer">
     select
       count(1)
     from
@@ -100,11 +100,27 @@
       user_id = #{userId}
   </select>
 
+  <select id="countUserRoleByRoleId" parameterType="int" resultType="java.lang.Integer">
+    select
+      count(1)
+    from
+      t_user_role
+    where
+      role_id = #{roleId}
+  </select>
+
   <delete id="deleteUserRoleByUserId" parameterType="int">
     delete from
-        t_user_role
+      t_user_role
     where
-        user_id = #{userId}
+      user_id = #{userId}
+  </delete>
+
+  <delete id="deleteUserRoleByRoleId" parameterType="int">
+    delete from
+      t_user_role
+    where
+      role_id = #{roleId}
   </delete>
   
   <insert id="insertBatch">
