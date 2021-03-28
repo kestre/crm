@@ -2,6 +2,7 @@ package org.example.crm.service;
 
 import org.example.crm.base.BaseService;
 import org.example.crm.dao.UserMapper;
+import org.example.crm.dao.UserRoleMapper;
 import org.example.crm.model.UserModel;
 import org.example.crm.utils.AssertUtil;
 import org.example.crm.utils.Md5Util;
@@ -9,11 +10,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.example.crm.utils.PhoneUtil;
 import org.example.crm.utils.UserIDBase64;
 import org.example.crm.vo.User;
+import org.example.crm.vo.UserRole;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,9 @@ public class UserService extends BaseService<User, Integer> {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private UserRoleMapper userRoleMapper;
 
     public  UserModel userLogin(String userName, String userPwd){
 
@@ -94,6 +100,33 @@ public class UserService extends BaseService<User, Integer> {
         user.setUserPwd(Md5Util.encode("123456"));
 
         AssertUtil.isTrue(userMapper.insertSelective(user) != 1, "添加失败！");
+
+        //  用户角色关联
+        relationUserRole(user.getId(), user.getRoleIds());
+    }
+
+    private void relationUserRole(Integer userId, String roleIds) {
+        Integer count = userRoleMapper.countUserRoleById(userId);
+
+        if(count > 0) {
+            AssertUtil.isTrue(userRoleMapper.deleteUserRoleByUserId(userId) != count, "用户角色分配失败！");
+        }
+
+        if(StringUtils.isNotBlank(roleIds)) {
+            List<UserRole> userRolesList = new ArrayList<>();
+
+            String[] roleIdsArray = roleIds.split(",");
+            for (String roleId: roleIdsArray) {
+                UserRole userRole = new UserRole();
+                userRole.setRoleId(Integer.parseInt(roleId));
+                userRole.setUserId(userId);
+                userRole.setCreateDate(new Date());
+                userRole.setUpdateDate(new Date());
+
+                userRolesList.add(userRole);
+            }
+            AssertUtil.isTrue(userRoleMapper.insertBatch(userRolesList) != userRolesList.size(), "用户角色分配失败！");
+        }
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -109,6 +142,8 @@ public class UserService extends BaseService<User, Integer> {
         user.setUpdateDate(new Date());
 
         AssertUtil.isTrue(userMapper.updateByPrimaryKeySelective(user) != 1, "添加失败！");
+
+        relationUserRole(user.getId(), user.getRoleIds());
     }
 
 
@@ -118,6 +153,14 @@ public class UserService extends BaseService<User, Integer> {
         AssertUtil.isTrue(null == ids || ids.length < 1, "请选择！");
 
         AssertUtil.isTrue(userMapper.deleteBatch(ids) != ids.length, "删除失败！");
+
+        for (Integer userId: ids) {
+            Integer count = userRoleMapper.countUserRoleById(userId);
+
+            if (count > 0) {
+                AssertUtil.isTrue(userRoleMapper.deleteUserRoleByUserId(userId) != count, "删除失败！");
+            }
+        }
     }
 
     private void checkUserParams(String userName, String email, String phone, Integer userId) {

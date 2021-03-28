@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface RoleMapper extends BaseMapper<Role, Integer> {
-    public List<Map<String, Object>> queryAllRoles();
+    public List<Map<String, Object>> queryAllRoles(Integer userId);
 }

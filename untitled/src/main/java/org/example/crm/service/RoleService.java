@@ -15,7 +15,7 @@ public class RoleService extends BaseService<Role, Integer> {
     @Resource
     private RoleMapper roleMapper;
 
-    public List<Map<String, Object>> queryAllSales() {
-        return roleMapper.queryAllRoles();
+    public List<Map<String, Object>> queryAllSales(Integer userId) {
+        return roleMapper.queryAllRoles(userId);
     }
 }
