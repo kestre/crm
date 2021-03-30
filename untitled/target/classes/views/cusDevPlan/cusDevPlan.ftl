@@ -32,20 +32,6 @@
 	</blockquote>
 	<table id="cusDevPlanList" class="layui-table"  lay-filter="cusDevPlans"></table>
 
-
-	<script type="text/html" id="toolbarDemo">
-		<div class="layui-btn-container">
-			<a class="layui-btn layui-btn-normal addNews_btn" lay-event="add">
-				<i class="layui-icon">&#xe608;</i>
-				添加
-			</a>
-			<a class="layui-btn layui-btn-normal delNews_btn layui-bg-red" lay-event="del">
-				<i class="layui-icon">&#xe616</i>
-				删除
-			</a>
-		</div>
-	</script>
-
 	<script id="op" type="text/html" >
 		{{# if (d.devResult=== 0 || d.devResult==1) { }}
 			<a href="javascript:;" class="layui-btn layui-btn-warm layui-btn-xs" lay-event="dev">开发</a>

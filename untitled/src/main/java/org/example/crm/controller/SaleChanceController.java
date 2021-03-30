@@ -1,5 +1,6 @@
 package org.example.crm.controller;
 
+import org.example.crm.annoation.RequiredPermission;
 import org.example.crm.base.BaseController;
 import org.example.crm.base.ResultInfo;
 import org.example.crm.enums.StateStatus;
@@ -26,6 +27,7 @@ public class SaleChanceController extends BaseController {
 
     //      flag = 1 查询客户开发计划
     //      flag = null 查询营销机会数据
+    @RequiredPermission(code = "101001")
     @RequestMapping("list")
     @ResponseBody
     public Map<String, Object> querySaleChanceByParams(SaleChanceQuery saleChanceQuery, Integer flag,
@@ -39,11 +41,14 @@ public class SaleChanceController extends BaseController {
         return saleChanceService.querySaleChanceByParams(saleChanceQuery);
     }
 
+    @RequiredPermission(code = "1010")
     @RequestMapping("index")
     public String index(){
         return "saleChance/saleChance";
     }
 
+
+    @RequiredPermission(code = "101002")
     @RequestMapping("addSaleChance")
     @ResponseBody
     public ResultInfo addSaleChance(SaleChance saleChance, HttpServletRequest request){
@@ -56,6 +61,8 @@ public class SaleChanceController extends BaseController {
         return success("添加成功！");
     }
 
+
+    @RequiredPermission(code = "101004")
     @RequestMapping("updateSaleChance")
     @ResponseBody
     public ResultInfo updateSaleChance(SaleChance saleChance){
@@ -75,6 +82,8 @@ public class SaleChanceController extends BaseController {
         return "saleChance/addAndUpdate";
     }
 
+
+    @RequiredPermission(code = "101003")
     @RequestMapping("delete")
     @ResponseBody
     public ResultInfo deleteSaleChance(Integer[] ids) {

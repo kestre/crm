@@ -1,5 +1,6 @@
 package org.example.crm.controller;
 
+import org.example.crm.annoation.RequiredPermission;
 import org.example.crm.base.BaseController;
 import org.example.crm.base.ResultInfo;
 import org.example.crm.query.CusDevPlanQuery;
@@ -43,6 +44,8 @@ public class CusDevPlanController extends BaseController {
         return "cusDevPlan/cusDevPlanData";
     }
 
+
+    @RequiredPermission(code = "102001")
     @RequestMapping("list")
     @ResponseBody
     public Map<String, Object> queryCusDevPlanByParams(CusDevPlanQuery cusDevPlanQuery) {

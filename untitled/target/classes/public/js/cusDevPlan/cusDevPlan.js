@@ -14,10 +14,8 @@ layui.use(['table','layer'],function() {
         height : "full-125",
         limits : [10,15,20,25],
         limit : 10,
-        toolbar: "#toolbarDemo",
         id : "cusDevPlanTable",
         cols : [[
-            {type: "checkbox", fixed:"center"},
             {field: "id", title:'编号',fixed:"true"},
             {field: 'chanceSource', title: '机会来源',align:"center"},
             {field: 'customerName', title: '客户名称',  align:'center'},
@@ -76,54 +74,6 @@ layui.use(['table','layer'],function() {
         });
     });
 
-    // 为表格的新增和修改页面添加事件
-    table.on('toolbar(cusDevPlans)', function(obj){
-        switch(obj.event){
-            // 添加事件
-            case 'add':
-                // 开启子窗口
-                openSaleChanceDialog("客户开发计划 - 添加营销机会", "saleChance/toSaleChance");
-                break;
-            // 批量删除事件
-            case 'del':
-                // 获取被选中的数据
-                let checkStatus = table.checkStatus(obj.config.id);
-                if (checkStatus.data.length < 1) {
-                    layer.msg("未选中任何数据", {icon: 5});
-                } else {
-                    // 将选中的数据的id封装
-                    let ids = "";
-                    $.each(checkStatus.data, function (index, id) {
-                        if (index == checkStatus.data.length - 1) {
-                            ids += "ids=" + id.id;
-                        }else {
-                            ids += "ids=" + id.id + "&";
-                        }
-                    });
-                    layer.confirm('选中删除行数：<span style="color: orange">'+checkStatus.data.length+'</span><br/>', {
-                        btn: ['确定', '取消'], //按钮
-                        icon: 3,
-                        title: '营销机会管理 - 批量删除'
-                    }, function () {
-                        $.post(
-                            "saleChance/deleteSaleChance?" + ids,
-                            {},
-                            function (data) {
-                                if (data.code == 200) {
-                                    layer.msg(data.msg);
-                                    // 重载表格
-                                    tableIns.reload();
-                                } else {
-                                    layer.msg(data.msg, {icon: 5});
-                                }
-                            }
-                        );
-                    });
-                }
-                break;
-        };
-    });
-
     // 表单右侧工具栏
     table.on('tool(cusDevPlans)', function(obj){
         // console.log("obj", obj);
@@ -140,7 +90,7 @@ layui.use(['table','layer'],function() {
     });
 
     // 开启新窗口
-    function openSaleChanceDialog(title, url) {
+    function openCusDevOlanDialog(title, url) {
         title = "<h2>" + title + "</h2>";
         layui.layer.open({
             type: 2,

@@ -2,6 +2,7 @@ package org.example.crm;
 
 import com.alibaba.fastjson.JSON;
 import org.example.crm.base.ResultInfo;
+import org.example.crm.exceptions.AuthException;
 import org.example.crm.exceptions.NoLoginException;
 import org.example.crm.exceptions.ParamsException;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,12 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 
                     modelAndView.addObject("code", p.getCode());
                     modelAndView.addObject("msg",p.getMsg());
+                }else if(e instanceof AuthException){
+                    AuthException a = (AuthException) e;
+
+                    System.out.println(a.getMsg());
+                    modelAndView.addObject("code", a.getCode());
+                    modelAndView.addObject("msg",a.getMsg());
                 }
 
                 return modelAndView;
@@ -55,6 +62,11 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
                     ParamsException p = (ParamsException) e;
                     resultInfo.setCode(p.getCode());
                     resultInfo.setMsg(p.getMsg());
+                }else if(e instanceof AuthException){
+                    AuthException a = (AuthException) e;
+                    System.out.println(a.getMsg());
+                    resultInfo.setCode(a.getCode());
+                    resultInfo.setMsg(a.getMsg());
                 }
 
                 httpServletResponse.setContentType("application/json;charset=UTF-8");
