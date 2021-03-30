@@ -66,7 +66,7 @@ layui.use(['form', 'layer'], function () {
             {},
             function (data) {
                 if (data.code == 200) {
-                    
+
                 } else {
                     layer.msg(data.msg, {icon: 5});
                 }

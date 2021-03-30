@@ -19,8 +19,8 @@ public class ModuleController extends BaseController {
 
     @RequestMapping("queryAllModules")
     @ResponseBody
-    public List<TreeModel> queryAllModules() {
-        return moduleService.queryAllModules();
+    public List<TreeModel> queryAllModules(Integer roleId) {
+        return moduleService.queryAllModules(roleId);
     }
 
     @RequestMapping("toModulePage")
