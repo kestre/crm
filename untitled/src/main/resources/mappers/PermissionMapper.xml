@@ -148,4 +148,19 @@
         ur.user_id = #{userId}
   </select>
 
+  <select id="countPermissionByModuleId" parameterType="int" resultType="java.lang.Integer">
+    select
+      count(1)
+    from
+      t_permission
+    where
+      module_id = #{id}
+  </select>
+
+  <delete id="deleteByPermissionByModuleId" parameterType="int">
+    delete from
+      t_permission
+    where
+      module_id = #{id}
+  </delete>
 </mapper>

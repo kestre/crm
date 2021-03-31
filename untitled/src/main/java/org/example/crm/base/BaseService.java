@@ -120,4 +120,5 @@ public abstract class BaseService<T,ID> {
         result.put("msg", "没有查询到任何符合条件的数据");
         return result;
     }
+
 }

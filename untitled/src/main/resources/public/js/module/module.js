@@ -1,4 +1,10 @@
-layui.use(['table','layer'],function() {
+layui.config({
+    base: '/crm/js/lay-module/'
+}).extend({
+    treetable: 'treetable-lay/treetable'
+});
+
+layui.use(['table','layer', 'treetable'],function() {
     var $ = layui.jquery,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         table = layui.table;
@@ -10,7 +16,7 @@ layui.use(['table','layer'],function() {
         treeIdName: 'id',
         treePidName: 'parentId',
         elem: '#modules',
-        url: 'module/modules',
+        url: crm + '/module/list',
         toolbar: '#toolBar',
         treeDefaultClose: true,
         page: true,
@@ -79,9 +85,9 @@ layui.use(['table','layer'],function() {
                     title: '资源管理 - 资源删除'
                 }, function () {
                     $.post(
-                        "module/deleteModule?ids=" + obj.data.id,
+                        "module/delete?",
                         {
-                            ids: obj.data.id
+                            id: obj.data.id
                         },
                         function (data) {
                             if (data.code == 200) {

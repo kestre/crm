@@ -14,7 +14,7 @@ layui.use(['form', 'layer'], function () {
             time: false
         });
         //弹出loading
-        $.post("module/addModule", data.field, function (res) {
+        $.post("module/add", data.field, function (res) {
             layer.close(msg);
             if (res.code == 200) {
                 layer.msg(res.msg, {icon: 6});
