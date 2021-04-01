@@ -36,10 +36,11 @@ public class CusDevPlanController extends BaseController {
     @RequestMapping("toCusDevPlan")
     public String toSaleChancePage(Integer id, HttpServletRequest request){
 
-        SaleChance saleChance = saleChanceService.selectByPrimaryKey(id);
+        if( id != null) {
+            SaleChance saleChance = saleChanceService.selectByPrimaryKey(id);
 
-        request.setAttribute("saleChance", saleChance);
-
+            request.setAttribute("saleChance", saleChance);
+        }
 
         return "cusDevPlan/cusDevPlanData";
     }

@@ -9,7 +9,7 @@ layui.use(['table','layer','form'],function() {
      */
     var  tableIns = table.render({
         elem: '#customerList',
-        url : 'customer/customerList',
+        url : 'customer/list',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -21,24 +21,22 @@ layui.use(['table','layer','form'],function() {
             {type: "checkbox", fixed:"left", width:50},
             {field: "id", title:'编号',fixed:"true", width:80},
             {field: 'name', title: '客户名', align:'center'},
-            {field: 'fr', title: '法人', align:'center'},
-            {field: 'khno', title: '客户编号', align:'center'},
+            {field: 'ceo', title: '法人', align:'center'},
+            {field: 'cusNum', title: '客户编号', align:'center'},
             {field: 'area', title: '地区', align:'center'},
             {field: 'cusManager', title: '客户经理', align:'center'},
-            {field: 'myd', title: '满意度', align:'center'},
+            {field: 'cusSatisfied', title: '满意度', align:'center'},
             {field: 'level', title: '客户级别', align:'center'},
-            {field: 'xyd', title: '信用度', align:'center'},
+            {field: 'cusCredit', title: '信用度', align:'center'},
             {field: 'address', title: '详细地址', align:'center'},
             {field: 'postCode', title: '邮编', align:'center'},
             {field: 'phone', title: '电话', align:'center'},
             {field: 'webSite', title: '网站', align:'center'},
             {field: 'fax', title: '传真', align:'center'},
-            {field: 'zczj', title: '注册资金', align:'center'},
-            {field: 'yyzzzch', title: '营业执照', align:'center'},
-            {field: 'khyh', title: '开户行', align:'center'},
-            {field: 'khzh', title: '开户账号', align:'center'},
-            {field: 'gsdjh', title: '国税', align:'center'},
-            {field: 'dsdjh', title: '地税', align:'center'},
+            {field: 'regCapital', title: '注册资金', align:'center'},
+            {field: 'busRegistration', title: '营业执照', align:'center'},
+            {field: 'accountBank', title: '开户行', align:'center'},
+            {field: 'account', title: '开户账号', align:'center'},
             {field: 'createDate', title: '创建时间', align:'center'},
             {field: 'updateDate', title: '更新时间', align:'center'},
             {title: '操作', minWidth:150, templet:'#customerListBar',fixed:"right",align:"center"}
@@ -51,7 +49,7 @@ layui.use(['table','layer','form'],function() {
         table.reload('customerTable', {
             where: {
                 customerName: $("[name='customerName']").val().trim(),
-                customerNo: $("[name='customerNo']").val().trim(),
+                cusNum: $("[name='cusNum']").val().trim(),
                 level: $("[name='level']").val()
             }
             ,page: {
@@ -162,23 +160,6 @@ layui.use(['table','layer','form'],function() {
         };
     });
 
-    // 开启新窗口
-    function openCustomerDialog(title, url) {
-        title = "<h2>" + title + "</h2>";
-        layui.layer.open({
-            type: 2,
-            title: title,
-            shadeClose: true,
-            shade: 0.6,
-            area: ['850px', '400px'],
-            content: url,
-            // 最大化最小化
-            maxmin: true,
-            // 不允许窗口拉伸
-            resize: false
-        });
-    }
-
     // 客户订单信息管理窗口
     function openCustomerDialog(title, url) {
         title = "<h2>" + title + "</h2>";
@@ -187,7 +168,7 @@ layui.use(['table','layer','form'],function() {
             title: title,
             shadeClose: true,
             shade: 0.6,
-            area: ['900px', '500px'],
+            area: ['850px', '600px'],
             content: url,
             // 最大化最小化
             maxmin: true,

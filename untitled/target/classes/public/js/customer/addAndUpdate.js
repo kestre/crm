@@ -23,10 +23,10 @@ layui.use(['form', 'layer'], function () {
         let url = '';
         if ($("[name='id']").val() == null || $("[name='id']").val() == '') {
             // 新增
-            url += "customer/addCustomer";
+            url += "customer/add";
         } else {
             // 修改
-            url += "customer/updateCustomer";
+            url += "customer/update";
         }
         // 发送请求
         $.post(
