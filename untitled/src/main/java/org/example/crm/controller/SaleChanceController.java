@@ -62,7 +62,7 @@ public class SaleChanceController extends BaseController {
     }
 
 
-    @RequiredPermission(code = "101004")
+    @RequiredPermission(code = "101003")
     @RequestMapping("updateSaleChance")
     @ResponseBody
     public ResultInfo updateSaleChance(SaleChance saleChance){
@@ -83,7 +83,7 @@ public class SaleChanceController extends BaseController {
     }
 
 
-    @RequiredPermission(code = "101003")
+    @RequiredPermission(code = "101004")
     @RequestMapping("delete")
     @ResponseBody
     public ResultInfo deleteSaleChance(Integer[] ids) {

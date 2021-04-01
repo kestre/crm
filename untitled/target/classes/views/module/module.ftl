@@ -3,7 +3,6 @@
     <head>
         <title>资源管理</title>
         <#include "../common.ftl">
-        <script type="text/javascript" src="js/lay-module/treetable-lay/treetable.js"></script>
     </head>
     <body class="childrenBody">
 

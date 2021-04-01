@@ -44,7 +44,7 @@
             <div class="layui-form-item layui-row layui-col-xs12">
                 <label class="layui-form-label">成功几率(%)</label>
                 <div class="layui-input-block">
-                    <input type="number" class="layui-input" name="cgjl" value="${(saleChance.cgjl)!}" placeholder="请输入成功几率">
+                    <input type="number" class="layui-input" name="successRatio" value="${(saleChance.successRatio)!}" placeholder="请输入成功几率">
                 </div>
             </div>
             <div class="layui-form-item layui-row layui-col-xs12">

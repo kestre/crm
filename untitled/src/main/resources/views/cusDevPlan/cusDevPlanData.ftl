@@ -59,7 +59,7 @@
 							<label class="layui-form-label">成功几率(%)</label>
 							<div class="layui-input-block">
 								<input type="text" class="layui-input"
-									   name="cgjl" value="${(saleChance.cgjl)!}"  readonly="readonly">
+									   name="successRatio" value="${(saleChance.successRatio)!}"  readonly="readonly">
 							</div>
 						</div>
 					</div>

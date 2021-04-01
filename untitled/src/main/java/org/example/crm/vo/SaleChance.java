@@ -11,7 +11,7 @@ public class SaleChance {
 
     private String customerName;
 
-    private Integer cgjl;
+    private Integer successRatio;
 
     private String overview;
 
@@ -66,12 +66,12 @@ public class SaleChance {
         this.customerName = customerName == null ? null : customerName.trim();
     }
 
-    public Integer getCgjl() {
-        return cgjl;
+    public Integer getSuccessRatio() {
+        return successRatio;
     }
 
-    public void setCgjl(Integer cgjl) {
-        this.cgjl = cgjl;
+    public void setSuccessRatio(Integer successRatio) {
+        this.successRatio = successRatio;
     }
 
     public String getOverview() {

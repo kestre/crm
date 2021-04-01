@@ -20,7 +20,7 @@ layui.use(['table','layer'],function(){
             {field: "id", title:'编号', sort: true, fixed:"true"},
             {field: 'chanceSource', title: '机会来源',align:"center"},
             {field: 'customerName', title: '客户名称',  align:'center'},
-            {field: 'cgjl', title: '成功几率', align:'center'},
+            {field: 'successRatio', title: '成功几率', align:'center'},
             {field: 'overview', title: '概要', align:'center'},
             {field: 'linkMan', title: '联系人',  align:'center'},
             {field: 'linkPhone', title: '联系电话', align:'center'},
