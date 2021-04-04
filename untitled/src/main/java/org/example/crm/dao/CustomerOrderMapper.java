@@ -7,4 +7,6 @@ import java.util.Map;
 
 public interface CustomerOrderMapper extends BaseMapper<CustomerOrder, Integer> {
     Map<String, Object> queryOrderById(Integer orderId);
+
+    CustomerOrder queryLossCustomerOrderByCustomerId(Integer customerId);
 }

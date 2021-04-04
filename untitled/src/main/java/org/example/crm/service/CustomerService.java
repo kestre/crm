@@ -5,27 +5,34 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.example.crm.base.BaseService;
+import org.example.crm.dao.CustomerLossMapper;
 import org.example.crm.dao.CustomerMapper;
+import org.example.crm.dao.CustomerOrderMapper;
 import org.example.crm.query.CustomerQuery;
 import org.example.crm.utils.AssertUtil;
 import org.example.crm.utils.PhoneUtil;
 import org.example.crm.vo.CusDevPlan;
 import org.example.crm.vo.Customer;
+import org.example.crm.vo.CustomerLoss;
+import org.example.crm.vo.CustomerOrder;
 import org.springframework.expression.spel.ast.Assign;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CustomerService extends BaseService<Customer, Integer> {
     @Resource
     private CustomerMapper customerMapper;
+
+    @Resource
+    private CustomerOrderMapper customerOrderMapper;
+
+    @Resource
+    private CustomerLossMapper customerLossMapper;
 
     public Map<String, Object> queryCustomerByParams(CustomerQuery customerQuery){
         Map<String, Object> map = new HashMap<>();
@@ -98,5 +105,40 @@ public class CustomerService extends BaseService<Customer, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(name), "客户名称不能为空！");
         AssertUtil.isTrue(StringUtils.isBlank(ceo), "法人代表不能为空！");
         AssertUtil.isTrue(!PhoneUtil.isMobile(phone), "手机号码格式不正确！");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateCustomerState() {
+        List<Customer> lossCustomerList = customerMapper.queryLossCustomers();
+
+        if(lossCustomerList != null && lossCustomerList.size() > 0) {
+            List<Integer> lossCustomerIds = new ArrayList<>();
+
+            List<CustomerLoss> customerLossList = new ArrayList<>();
+
+            lossCustomerList.forEach(customer -> {
+                CustomerLoss customerLoss = new CustomerLoss();
+                customerLoss.setCreateDate(new Date());
+                customerLoss.setCusManager(customer.getCusManager());
+                customerLoss.setCusName(customer.getName());
+                customerLoss.setCusNum(customer.getCusNum());
+                customerLoss.setIsValid(1);
+                customerLoss.setUpdateDate(new Date());
+                customerLoss.setState(0);
+
+                CustomerOrder customerOrder = customerOrderMapper.queryLossCustomerOrderByCustomerId(customer.getId());
+                if(customerOrder != null) {
+                    customerLoss.setLastOrderTime(customerOrder.getOrderDate());
+                }
+
+                customerLossList.add(customerLoss);
+
+                lossCustomerIds.add(customer.getId());
+            });
+
+            AssertUtil.isTrue(customerLossMapper.insertBatch(customerLossList) != customerLossList.size(), "客户流失数据转移失败！");
+
+            AssertUtil.isTrue(customerMapper.updateCustomerStateByIds(lossCustomerIds) != lossCustomerIds.size(), "客户流失数据转移失败！");
+        }
     }
 }

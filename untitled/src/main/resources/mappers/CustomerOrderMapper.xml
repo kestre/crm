@@ -171,4 +171,11 @@
         and o.id = #{orderId}
         and od.is_valid = 1
     </select>
+  <!--查询指定客户最后一条订单记录-->
+  <select id="queryLossCustomerOrderByCustomerId" parameterType="int" resultType="">
+    select *
+    from t_customer_order
+    where is_valid = 1 and cus_id = #{cutomerId}
+    order by order_date desc limit 1
+  </select>
 </mapper>

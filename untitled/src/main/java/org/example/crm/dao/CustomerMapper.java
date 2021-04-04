@@ -9,4 +9,8 @@ public interface CustomerMapper extends BaseMapper<Customer, Integer> {
     List<String> getLevels();
 
     Customer queryCustomerByName(String name);
+
+    List<Customer> queryLossCustomers();
+
+    int updateCustomerStateByIds(List<Integer> lossCustomerIds);
 }

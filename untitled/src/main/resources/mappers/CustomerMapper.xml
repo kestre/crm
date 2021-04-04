@@ -331,7 +331,7 @@
         is_valid = 1 and name = #{name}
   </select>
 
-<!--    批量删除-->
+  <!--    批量删除-->
   <update id="deleteBatch">
     update
         t_customer
@@ -352,6 +352,30 @@
       t_customer
     where
       is_valid=1
+  </select>
+
+  <select id="queryLossCustomers" resultType="org.example.crm.vo.Customer">
+    select *
+    from t_customer c
+    where is_valid = 1 and state = 0 and DATE_ADD(c.create_date, INTERVAL 6 MONTH ) &lt; NOW()
+    and c.id not in (
+        select distinct cus_id
+        from t_customer_order o
+        where is_valid = 1 and o.state = 1 and DATE_ADD(o.order_date, INTERVAL 6 MONTH ) &gt; NOW()
+      )
+  </select>
+  
+  <!--批量更新客户流失状态-->
+  <select id="updateCustomerStateByIds" resultType="org.example.crm.vo.Customer">
+    update
+        t_customer
+    set
+        state = 1
+    where
+        id in
+    <foreach collection="list" item="item" separator=",">
+      #{item}
+    </foreach>
   </select>
 
 </mapper>
