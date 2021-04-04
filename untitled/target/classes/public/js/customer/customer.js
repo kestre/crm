@@ -88,7 +88,7 @@ layui.use(['table','layer','form'],function() {
                         title: '客户信息管理 - 批量删除'
                     }, function () {
                         $.post(
-                            "customer/deleteCustomer?" + ids,
+                            "customer/delete?" + ids,
                             {},
                             function (data) {
                                 if (data.code == 200) {
@@ -119,7 +119,7 @@ layui.use(['table','layer','form'],function() {
                     layer.msg("无法同时查看多个客户信息", {icon: 5});
                 } else {
                     // 开启客户订单窗口
-                    openCustomerDialog("客户管理 - 查询订单信息", "customer/toCustomerOrderPage?customerId=" + checkStatus.data[0].id);
+                    openCustomerOrderDialog("客户管理 - 查询订单信息", "customer/toCustomerOrderPage?customerId=" + checkStatus.data[0].id);
                     break;
                 }
         };
@@ -141,7 +141,7 @@ layui.use(['table','layer','form'],function() {
                     title: '客户信息管理 - 单行删除'
                 }, function(){
                     $.post(
-                        "customer/deleteCustomer",
+                        "customer/delete",
                         {
                             ids: obj.data.id
                         },
@@ -160,7 +160,7 @@ layui.use(['table','layer','form'],function() {
         };
     });
 
-    // 客户订单信息管理窗口
+    // 客户信息管理窗口
     function openCustomerDialog(title, url) {
         title = "<h2>" + title + "</h2>";
         layui.layer.open({
@@ -169,6 +169,23 @@ layui.use(['table','layer','form'],function() {
             shadeClose: true,
             shade: 0.6,
             area: ['850px', '600px'],
+            content: url,
+            // 最大化最小化
+            maxmin: true,
+            // 不允许窗口拉伸
+            resize: false
+        });
+    }
+
+    // 客户订单信息管理窗口
+    function openCustomerOrderDialog(title, url) {
+        title = "<h2>" + title + "</h2>";
+        layui.layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.6,
+            area: ['700px', '500px'],
             content: url,
             // 最大化最小化
             maxmin: true,

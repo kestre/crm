@@ -6,7 +6,7 @@ layui.use(['table','layer'],function(){
     // 渲染表格
     let tableIns = table.render({
             elem: '#customerOrderList',
-            url : 'customerOrder/customerOrderList?cusId='+$("input[name='cusId']").val(),
+            url : 'order/list?cusId='+$("input[name='cusId']").val(),
             cellMinWidth : 95,
             page : true,
             height : "full-125",
@@ -41,7 +41,7 @@ layui.use(['table','layer'],function(){
             // 进入订单详情窗口
             case 'detail':
                 // 开启修改编辑窗口
-                openCustomerOrderDetailDialog("客户信息管理 - 查询订单详情", "orderDetail/toOrderDetailPage?id=" + obj.data.id);
+                openCustomerOrderDetailDialog("客户信息管理 - 查询订单详情", "order/toOrderDetailPage?orderId=" + obj.data.id);
                 break;
         };
     });

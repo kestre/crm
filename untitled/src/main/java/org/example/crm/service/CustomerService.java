@@ -79,6 +79,14 @@ public class CustomerService extends BaseService<Customer, Integer> {
         AssertUtil.isTrue(customerMapper.updateByPrimaryKeySelective(customer) < 1, "更新失败！");
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteCustomer(Integer[] ids){
+
+        AssertUtil.isTrue(null == ids || ids.length < 1, "请选择！");
+
+        AssertUtil.isTrue(customerMapper.deleteBatch(ids) != ids.length, "删除失败！");
+    }
+
     public List<String> getLevels() {
         List<String> levels = customerMapper.getLevels();
         AssertUtil.isTrue(levels == null || levels.size() == 0, "获取客户级别失败");

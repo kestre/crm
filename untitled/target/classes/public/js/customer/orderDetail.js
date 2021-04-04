@@ -6,7 +6,7 @@ layui.use(['table','layer'],function(){
     // 渲染表格
     let tableIns = table.render({
             elem: '#orderDetailList',
-            url : 'orderDetail/orderDetailList?orderId='+$("#orderId").val(),
+            url : 'orderDetail/list?orderId='+$("#orderId").val(),
             cellMinWidth : 95,
             page : true,
             height : "full-125",
@@ -16,8 +16,8 @@ layui.use(['table','layer'],function(){
             // id : "orderDetailList",
             cols : [[
                 {field: "id", title:'编号', minWidth:80, fixed:"true"},
-                {field: 'goodsName', title: '商品名称', minWidth:100, align:"center"},
-                {field: 'goodsNum', title: '商品数量',align:"center"},
+                {field: 'goodName', title: '商品名称', minWidth:100, align:"center"},
+                {field: 'goodNum', title: '商品数量',align:"center"},
                 {field: 'unit', title: '单位',align:"center"},
                 {field: 'price', title: '单价(￥)',align:"center"},
                 {field: 'sum', title: '总价(￥)',align:"center"},

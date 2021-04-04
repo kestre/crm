@@ -9,6 +9,7 @@ import org.example.crm.vo.Customer;
 import org.example.crm.vo.SaleChance;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,6 +43,18 @@ public class CustomerController extends BaseController {
         return "customer/addAndUpdate";
     }
 
+    @RequestMapping("toCustomerOrderPage")
+    public String toCustomerOrderPage(Integer customerId, HttpServletRequest request){
+
+        if( customerId != null) {
+            Customer customer = customerService.selectByPrimaryKey(customerId);
+
+            request.setAttribute("customer", customer);
+        }
+
+        return "customer/customerOrder";
+    }
+
     @RequestMapping("list")
     @ResponseBody
     public Map<String, Object> queryCustomerByParams(CustomerQuery customerQuery) {
@@ -63,6 +76,15 @@ public class CustomerController extends BaseController {
         customerService.updateCustomer(customer);
 
         return success("更新成功！");
+    }
+
+    @PostMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteCustomer(Integer[] ids) {
+
+        customerService.deleteCustomer(ids);
+
+        return success("删除成功！");
     }
 
     @GetMapping("/getLevels")

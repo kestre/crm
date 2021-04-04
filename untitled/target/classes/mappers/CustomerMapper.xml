@@ -331,19 +331,19 @@
         is_valid = 1 and name = #{name}
   </select>
 
-  <!--  批量删除-->
-<!--  <update id="deleteBatch">-->
-<!--    update-->
-<!--    t_user-->
-<!--    set-->
-<!--    is_valid = 0-->
-<!--    where-->
-<!--    id-->
-<!--    in-->
-<!--    <foreach collection="array" separator="," open="(" close=")" item="id">-->
-<!--      #{id}-->
-<!--    </foreach>-->
-<!--  </update>-->
+<!--    批量删除-->
+  <update id="deleteBatch">
+    update
+        t_customer
+    set
+        is_valid = 0,update_date = now()
+    where
+        id
+    in
+    <foreach collection="array" separator="," open="(" close=")" item="id">
+      #{id}
+    </foreach>
+  </update>
 
   <select id="getLevels" flushCache="false" useCache="true" resultType="String">
     select
