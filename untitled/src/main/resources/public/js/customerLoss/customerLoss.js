@@ -9,7 +9,7 @@ layui.use(['table','layer','form'],function() {
      */
     var  tableIns = table.render({
         elem: '#customerLossList',
-        url : 'customerLoss/customerLossList',
+        url : 'loss/list',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -19,7 +19,7 @@ layui.use(['table','layer','form'],function() {
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
             {field: "id", title:'编号',fixed:"true", width:80},
-            {field: 'cusNo', title: '客户编号', align:'center'},
+            {field: 'cusNum', title: '客户编号', align:'center'},
             {field: 'cusName', title: '客户名称', align:'center'},
             {field: 'cusManager', title: '客户经理', align:'center'},
             {field: 'lastOrderTime', title: '最后下单时间', align:'center'},
@@ -53,8 +53,8 @@ layui.use(['table','layer','form'],function() {
         // 重新渲染表格
         table.reload('customerLossTable', {
             where: {
-                customerNo: $("[name='customerNo']").val().trim(),
-                customerName: $("[name='customerName']").val().trim(),
+                cusNum: $("[name='cusNum']").val(),
+                cusName: $("[name='cusName']").val(),
                 state: $("[name='state']").val()
             }
             ,page: {
@@ -68,11 +68,11 @@ layui.use(['table','layer','form'],function() {
         switch(obj.event){
             // 添加暂缓
             case 'add':
-                openCustomerLossDialog("客户流失管理 - 添加暂缓客户", "customerLoss/customerLossData?id=" + obj.data.id);
+                openCustomerLossDialog("客户流失管理 - 添加暂缓客户", "loss/toCustomerLossPage?lossId=" + obj.data.id);
                 break;
             // 详情
             case 'info':
-                openCustomerLossDialog("客户流失管理 - 暂缓客户详情", "customerLoss/customerLossData?id=" + obj.data.id);
+                openCustomerLossDialog("客户流失管理 - 暂缓客户详情", "loss/toCustomerLossPage?lossId=" + obj.data.id);
                 break;
         };
     });

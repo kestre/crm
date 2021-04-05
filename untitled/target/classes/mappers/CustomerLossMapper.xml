@@ -173,4 +173,23 @@
       (#{item.cusNum},#{item.cusName},#{item.cusManager},#{item.lastOrderTime},#{item.confirmLossTime},#{item.state},#{item.lossReason},1, now(), now())
     </foreach>
   </insert>
+
+  <!--  多条件查询-->
+  <select id="selectByParams" parameterType="org.example.crm.query.CustomerLossQuery" resultType="org.example.crm.vo.CustomerLoss">
+    select
+    <include refid="Base_Column_List"></include>
+    from t_customer_loss
+    <where>
+      is_valid = 1
+      <if test="cusNum != null and cusNum != ''">
+        and cus_num = #{cusNum}
+      </if>
+      <if test="cusName != null and cusName != ''">
+        and cus_name = #{cusName}
+      </if>
+      <if test="state != null and state != ''">
+        and state = #{state}
+      </if>
+    </where>
+  </select>
 </mapper>

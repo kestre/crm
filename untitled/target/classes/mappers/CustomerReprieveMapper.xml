@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.crm.dao.RoleMapper">
-  <resultMap id="BaseResultMap" type="org.example.crm.vo.Role">
+<mapper namespace="org.example.crm.dao.CustomerReprieveMapper">
+  <resultMap id="BaseResultMap" type="org.example.crm.vo.CustomerReprieve">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-    <result column="role_remarker" jdbcType="VARCHAR" property="roleRemarker" />
+    <result column="loss_id" jdbcType="INTEGER" property="lossId" />
+    <result column="measure" jdbcType="VARCHAR" property="measure" />
     <result column="is_valid" jdbcType="INTEGER" property="isValid" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, role_name, role_remarker, is_valid, create_date, update_date
+    id, loss_id, measure, is_valid, create_date, update_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_role
+    from t_customer_reprieve
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_role
+    delete from t_customer_reprieve
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.example.crm.vo.Role">
-    insert into t_role (id, role_name, role_remarker, 
+  <insert id="insert" parameterType="org.example.crm.vo.CustomerReprieve">
+    insert into t_customer_reprieve (id, loss_id, measure, 
       is_valid, create_date, update_date
       )
-    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleRemarker,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{lossId,jdbcType=INTEGER}, #{measure,jdbcType=VARCHAR}, 
       #{isValid,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.example.crm.vo.Role">
-    insert into t_role
+  <insert id="insertSelective" parameterType="org.example.crm.vo.CustomerReprieve">
+    insert into t_customer_reprieve
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="roleName != null">
-        role_name,
+      <if test="lossId != null">
+        loss_id,
       </if>
-      <if test="roleRemarker != null">
-        role_remarker,
+      <if test="measure != null">
+        measure,
       </if>
       <if test="isValid != null">
         is_valid,
@@ -56,11 +56,11 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
+      <if test="lossId != null">
+        #{lossId,jdbcType=INTEGER},
       </if>
-      <if test="roleRemarker != null">
-        #{roleRemarker,jdbcType=VARCHAR},
+      <if test="measure != null">
+        #{measure,jdbcType=VARCHAR},
       </if>
       <if test="isValid != null">
         #{isValid,jdbcType=INTEGER},
@@ -73,14 +73,14 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.example.crm.vo.Role">
-    update t_role
+  <update id="updateByPrimaryKeySelective" parameterType="org.example.crm.vo.CustomerReprieve">
+    update t_customer_reprieve
     <set>
-      <if test="roleName != null">
-        role_name = #{roleName,jdbcType=VARCHAR},
+      <if test="lossId != null">
+        loss_id = #{lossId,jdbcType=INTEGER},
       </if>
-      <if test="roleRemarker != null">
-        role_remarker = #{roleRemarker,jdbcType=VARCHAR},
+      <if test="measure != null">
+        measure = #{measure,jdbcType=VARCHAR},
       </if>
       <if test="isValid != null">
         is_valid = #{isValid,jdbcType=INTEGER},
@@ -94,64 +94,41 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.example.crm.vo.Role">
-    update t_role
-    set role_name = #{roleName,jdbcType=VARCHAR},
-      role_remarker = #{roleRemarker,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="org.example.crm.vo.CustomerReprieve">
+    update t_customer_reprieve
+    set loss_id = #{lossId,jdbcType=INTEGER},
+      measure = #{measure,jdbcType=VARCHAR},
       is_valid = #{isValid,jdbcType=INTEGER},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <!-- 查询所有角色 -->
-  <select id="queryAllRoles" parameterType="int" resultType="java.util.Map">
-    select
-        r.id, r.role_name AS roleName,
-        CASE
-        WHEN IFNULL(temp.id, 0) = 0 THEN ''
-        ELSE 'selected'
-        END AS 'selected'
-    from
-        t_role r
-        LEFT JOIN (select r.id FROM t_role r Left JOIN t_user_role u ON r.id = u.role_id WHERE user_id = #{userId}) temp ON r.id = temp.id
-    where
-        is_valid = 1
-  </select>
 
   <!--  多条件查询-->
-  <select id="selectByParams" parameterType="org.example.crm.query.RoleQuery" resultType="org.example.crm.vo.Role">
+  <select id="selectByParams" parameterType="org.example.crm.query.CustomerReprieveQuery" resultType="org.example.crm.vo.CustomerReprieve">
     select
     <include refid="Base_Column_List"></include>
-    from t_role
+    from t_customer_reprieve
     <where>
       is_valid = 1
-      <if test="roleName != null and roleName != ''">
-        and role_name like concat('%', #{roleName}, '%')
+      <if test="lossId != null">
+        and loss_id = #{lossId}
       </if>
     </where>
   </select>
-  <!--  通过角色名查数据-->
-  <select id="selectByRoleName" parameterType="string" resultType="org.example.crm.vo.Role">
-    select
-    <include refid="Base_Column_List"></include>
-    from t_role
-    <where>
-      is_valid = 1
-    and
-        role_name = #{roleName}
-    </where>
-  </select>
+
   <!--  批量删除-->
   <update id="deleteBatch">
     update
-        t_role
+    t_customer_reprieve
     set
-        is_valid = 0,update_date = now()
+    is_valid = 0,update_date = now()
     where
-        id
+    id
     in
     <foreach collection="array" separator="," open="(" close=")" item="id">
       #{id}
     </foreach>
   </update>
+
 </mapper>

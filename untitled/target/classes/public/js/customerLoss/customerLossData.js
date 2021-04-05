@@ -9,7 +9,7 @@ layui.use(['table','layer','form'],function() {
     if ($("#state").val() == 1) {
         tableIns = table.render({
             elem: '#customerLossList',
-            url: 'customerReprieve/customerReprieveList?lossId=' + $("#id").val(),
+            url: 'customerRep/list?lossId=' + $("#id").val(),
             cellMinWidth : 95,
             page : true,
             height : "full-125",
@@ -30,7 +30,7 @@ layui.use(['table','layer','form'],function() {
         // 暂缓
         tableIns = table.render({
             elem: '#customerLossList',
-            url: 'customerReprieve/customerReprieveList?lossId=' + $("#id").val(),
+            url: 'customerRep/list?lossId=' + $("#id").val(),
             cellMinWidth : 95,
             page : true,
             height : "full-125",
@@ -72,7 +72,7 @@ layui.use(['table','layer','form'],function() {
                 }, function(value, index, elem){
                     // 发送请求
                     $.post(
-                        "customerReprieve/updateCustomerReprieve",
+                        "customerRep/update",
                         {
                             id: obj.data.id,
                             measure: value,
@@ -102,7 +102,7 @@ layui.use(['table','layer','form'],function() {
                     title: '客户流失管理 - 单行删除'
                 }, function(){
                     $.post(
-                        "customerReprieve/deleteCustomerReprieve",
+                        "customerRep/delete",
                         {
                             ids: obj.data.id
                         },
@@ -131,12 +131,12 @@ layui.use(['table','layer','form'],function() {
                 layer.prompt({
                     formType: 0,
                     value: '',
-                    title: '<span style="color: #00FF00">请输入新增的客户暂缓措施</span>',
+                    title: '<span>请输入新增的客户暂缓措施</span>',
                     area: ['800px', '350px']    //自定义文本域宽高
                 }, function(value, index, elem){
                     // 发送请求
                     $.post(
-                        "customerReprieve/addCustomerReprieve",
+                        "customerRep/add",
                         {
                             measure: value,
                             lossId: $("#id").val()
@@ -167,7 +167,7 @@ layui.use(['table','layer','form'],function() {
                 }, function(value, index, elem){
                     // 发送请求
                     $.post(
-                        "customerReprieve/updateCustomerLossState",
+                        "loss/updateCustomerLossStateById",
                         {
                             id: $("#id").val(),
                             lossReason: value
@@ -175,17 +175,10 @@ layui.use(['table','layer','form'],function() {
                             if (data.code == 200) {
                                 // 关闭输入框
                                 layer.close(index);
-                                // 重新渲染表单
-                                let confirm = layer.confirm('<span style="color: orange">需要刷新页面才能展示效果</span><br/>', {
-                                    btn: ['立即刷新', '取消'],  //按钮
-                                    icon: 3,
-                                    title: data.msg
-                                }, function () {
-                                    // 关闭当前提示框
-                                    layer.close(confirm);
-                                    // 刷新父页面
-                                    parent.location.reload('form');
-                                });
+                                // 关闭当前提示框
+                                layer.close("iframe");
+                                // 刷新父页面
+                                parent.location.reload();
                             } else {
                                 // 提示失败
                                 layer.msg(data.msg, {icon: 5});
@@ -215,7 +208,7 @@ layui.use(['table','layer','form'],function() {
                         title: '客户流失管理 - 批量删除'
                     }, function () {
                         $.post(
-                            "customerReprieve/deleteCustomerReprieve?" + ids,
+                            "customerRep/delete?" + ids,
                             {},
                             function (data) {
                                 if (data.code == 200) {
@@ -232,22 +225,4 @@ layui.use(['table','layer','form'],function() {
                 break;
         };
     });
-
-    // 客户流失暂缓管理窗口
-    function openCustomerLossDialog(title, url) {
-        title = "<h2>" + title + "</h2>";
-        layui.layer.open({
-            type: 2,
-            title: title,
-            shadeClose: true,
-            shade: 0.6,
-            area: ['900px', '500px'],
-            content: url,
-            // 最大化最小化
-            maxmin: true,
-            // 不允许窗口拉伸
-            resize: false
-        });
-    }
-
 });

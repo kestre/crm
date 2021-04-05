@@ -370,7 +370,7 @@
     update
         t_customer
     set
-        state = 1
+        state = 1,update_date = now()
     where
         id in
     <foreach collection="list" item="item" separator="," open="(" close=")">
