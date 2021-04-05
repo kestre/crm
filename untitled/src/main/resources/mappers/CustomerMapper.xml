@@ -366,16 +366,16 @@
   </select>
   
   <!--批量更新客户流失状态-->
-  <select id="updateCustomerStateByIds" resultType="org.example.crm.vo.Customer">
+  <update id="updateCustomerStateByIds">
     update
         t_customer
     set
         state = 1
     where
         id in
-    <foreach collection="list" item="item" separator=",">
+    <foreach collection="list" item="item" separator="," open="(" close=")">
       #{item}
     </foreach>
-  </select>
+  </update>
 
 </mapper>

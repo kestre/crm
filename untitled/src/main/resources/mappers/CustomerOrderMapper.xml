@@ -172,7 +172,7 @@
         and od.is_valid = 1
     </select>
   <!--查询指定客户最后一条订单记录-->
-  <select id="queryLossCustomerOrderByCustomerId" parameterType="int" resultType="">
+  <select id="queryLossCustomerOrderByCustomerId" parameterType="int" resultType="org.example.crm.vo.CustomerOrder">
     select *
     from t_customer_order
     where is_valid = 1 and cus_id = #{cutomerId}
