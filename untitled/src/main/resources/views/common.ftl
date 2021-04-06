@@ -1,6 +1,6 @@
 <#--添加base标签-->
 <base href="${crm}/"/>
-<link rel="icon" href="images/favicon.ico">
+<#--<link rel="icon" href="images/favicon.ico">-->
 <link rel="stylesheet" href="lib/layui-v2.5.5/css/layui.css" media="all">
 <link rel="stylesheet" href="css/layuimini.css" media="all">
 <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
