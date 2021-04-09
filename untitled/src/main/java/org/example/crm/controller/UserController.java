@@ -65,6 +65,13 @@ public class UserController extends BaseController {
         return userService.queryAllSales();
     }
 
+    @RequestMapping("queryAllCustomerManagers")
+    @ResponseBody
+    public List<Map<String, Object>> queryAllCustomerManagers(){
+
+        return userService.queryAllCustomerManagers();
+    }
+
     @RequestMapping("list")
     @ResponseBody
     public Map<String, Object> selectByParams(UserQuery userQuery) {

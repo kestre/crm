@@ -90,6 +90,11 @@ public class UserService extends BaseService<User, Integer> {
         return userMapper.queryAllSales();
     }
 
+    //查询所有的客户人员
+    public List<Map<String, Object>> queryAllCustomerManagers() {
+        return userMapper.queryAllCustomerManagers();
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public void addUser(User user) {
         checkUserParams(user.getUserName(), user.getEmail(), user.getPhone(), user.getId());
@@ -173,5 +178,4 @@ public class UserService extends BaseService<User, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(phone), "手机号码不能为空！");
         AssertUtil.isTrue(!PhoneUtil.isMobile(phone), "手机号码格式不正确！");
     }
-
 }

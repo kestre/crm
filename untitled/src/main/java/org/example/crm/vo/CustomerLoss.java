@@ -1,5 +1,7 @@
 package org.example.crm.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class CustomerLoss {
@@ -11,8 +13,10 @@ public class CustomerLoss {
 
     private String cusManager;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date lastOrderTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date confirmLossTime;
 
     private Integer state;
@@ -21,8 +25,10 @@ public class CustomerLoss {
 
     private Integer isValid;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
 
     public Integer getId() {

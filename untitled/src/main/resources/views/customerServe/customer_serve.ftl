@@ -31,7 +31,7 @@
 
 	<!--操作-->
 	<script id="toolbarDemo" type="text/html">
-		<a class="layui-btn layui-btn-normal addNews_btn" lay-event="add">添加</a>
+		<a class="layui-btn layui-btn-normal addNews_btn" lay-event="add"><i class="layui-icon">&#xe608;</i>添加</a>
 	</script>
 
 </form>

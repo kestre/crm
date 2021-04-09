@@ -7,6 +7,15 @@ public class CustomerServeQuery extends BaseQuery {
     private String customer;
     private String serveType;
     private String state;
+    private Integer assigner;
+
+    public Integer getAssigner() {
+        return assigner;
+    }
+
+    public void setAssigner(Integer assigner) {
+        this.assigner = assigner;
+    }
 
     public String getCustomer() {
         return customer;

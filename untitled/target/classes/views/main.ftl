@@ -2,16 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>CRM-智能办公系统</title>
+    <title>企业客户关系系统</title>
     <#include "common.ftl">
+    <link rel="stylesheet" href="css/main.css" media="all">
 </head>
 <body class="layui-layout-body layuimini-all">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header header">
         <div class="layui-logo">
-            <a href="main">
-                <img id="logo" src="images/logo.png" alt="logo" class="layui-circle">
-                <h1>CRM-智能办公</h1>
+            <a href="javascript:;" data-iframe-tab="welcome" data-title="welcome" >
+                <img id="logo" src="images/welcome.jpg" alt="logo" class="layui-circle">
+                <h1>welcome</h1>
             </a>
         </div>
         <a>

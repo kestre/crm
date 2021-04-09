@@ -21,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, serve_type, overview, customer, state, service_request, create_people, assigner, 
-    assign_time, service_proce_people, service_proce_time, service_proce_result, satisfied, 
+    assign_time, service_proce, service_proce_people, service_proce_time, service_proce_result, satisfied,
     is_valid, update_date, create_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -37,14 +37,14 @@
   <insert id="insert" parameterType="org.example.crm.vo.CustomerServe">
     insert into t_customer_serve (id, serve_type, overview, 
       customer, state, service_request, 
-      create_people, assigner, assign_time, 
-      service_proce_people, service_proce_time, 
+      create_people, assigner, assign_time,service_proce,
+      service_proce_people, service_proce_time,
       service_proce_result, satisfied, is_valid, 
       update_date, create_date)
     values (#{id,jdbcType=INTEGER}, #{serveType,jdbcType=VARCHAR}, #{overview,jdbcType=VARCHAR}, 
       #{customer,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{serviceRequest,jdbcType=VARCHAR}, 
-      #{createPeople,jdbcType=VARCHAR}, #{assigner,jdbcType=VARCHAR}, #{assignTime,jdbcType=TIMESTAMP}, 
-      #{serviceProcePeople,jdbcType=VARCHAR}, #{serviceProceTime,jdbcType=TIMESTAMP}, 
+      #{createPeople,jdbcType=VARCHAR}, #{assigner,jdbcType=VARCHAR}, #{assignTime,jdbcType=TIMESTAMP},
+      #{serviceProce,jdbcType=VARCHAR},#{serviceProcePeople,jdbcType=VARCHAR}, #{serviceProceTime,jdbcType=TIMESTAMP},
       #{serviceProceResult,jdbcType=VARCHAR}, #{satisfied,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
@@ -77,6 +77,9 @@
       </if>
       <if test="assignTime != null">
         assign_time,
+      </if>
+      <if test="serviceProce != null">
+        service_proce,
       </if>
       <if test="serviceProcePeople != null">
         service_proce_people,
@@ -128,6 +131,9 @@
       <if test="assignTime != null">
         #{assignTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="serviceProce != null">
+        #{serviceProce,jdbcType=VARCHAR},
+      </if>
       <if test="serviceProcePeople != null">
         #{serviceProcePeople,jdbcType=VARCHAR},
       </if>
@@ -178,6 +184,9 @@
       <if test="assignTime != null">
         assign_time = #{assignTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="serviceProce != null">
+        service_proce = #{serviceProce,jdbcType=VARCHAR},
+      </if>
       <if test="serviceProcePeople != null">
         service_proce_people = #{serviceProcePeople,jdbcType=VARCHAR},
       </if>
@@ -212,6 +221,7 @@
       create_people = #{createPeople,jdbcType=VARCHAR},
       assigner = #{assigner,jdbcType=VARCHAR},
       assign_time = #{assignTime,jdbcType=TIMESTAMP},
+      service_proce = #{serviceProce,jdbcType=VARCHAR},
       service_proce_people = #{serviceProcePeople,jdbcType=VARCHAR},
       service_proce_time = #{serviceProceTime,jdbcType=TIMESTAMP},
       service_proce_result = #{serviceProceResult,jdbcType=VARCHAR},
@@ -240,6 +250,9 @@
       </if>
       <if test="state != null and state != ''">
         and state = #{state}
+      </if>
+      <if test="assigner != null">
+        and assigner = #{assigner}
       </if>
     </where>
   </select>

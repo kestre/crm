@@ -42,22 +42,14 @@ layui.use(['table','layer'],function() {
     });
 
     // 表单右侧工具栏
-    table.on('tool(cusDevPlans)', function(obj){
-        // console.log("obj", obj);
-        switch(obj.event){
-            // 开发
-            case 'dev':
-                openCusDevOlanDialog("客户开发计划 - 计划项数据开发", "cusDevPlan/toCusDevPlan?id=" + obj.data.id);
-                break;
-            // 详情
-            case 'info':
-                openCusDevOlanDialog("客户开发计划 - 计划项数据维护", "cusDevPlan/toCusDevPlan?id=" + obj.data.id);
-                break;
-        };
+    table.on('toolbar(customerServes)', function(obj){
+        if(obj.event == "add"){
+            openCAddCustomerServeDialog("<h3>创建服务</h3>","customer_serve/toCustomerServeAddPage");
+        }
     });
 
     // 开启新窗口
-    function openCusDevOlanDialog(title, url) {
+    function openCAddCustomerServeDialog(title, url) {
         title = "<h2>" + title + "</h2>";
         layui.layer.open({
             type: 2,
