@@ -195,19 +195,19 @@ layui.use(['table','layer','form'],function() {
     }
 
     // 渲染客户级别下拉款
-    renderLevel();
-    function renderLevel() {
-        $.get(
-            "customer/getLevels",
-            {},
-            function (data) {
-                $("#level").append(new Option("客户级别", ""));
-                $.each(data, function (index, element) {
-                    $("#level").append(new Option(element, element));
-                });
-                form.render("select");
-            }
-        );
-    }
+    // renderLevel();
+    // function renderLevel() {
+    //     $.get(
+    //         "customer/getLevels",
+    //         {},
+    //         function (data) {
+    //             $("#level").append(new Option("客户级别", ""));
+    //             $.each(data, function (index, element) {
+    //                 $("#level").append(new Option(element, element));
+    //             });
+    //             form.render("select");
+    //         }
+    //     );
+    // }
 
 });

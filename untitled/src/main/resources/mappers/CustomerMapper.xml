@@ -378,4 +378,65 @@
     </foreach>
   </update>
 
+  <!--查询客户贡献-->
+  <select id="queryCustomerContributionByParams" parameterType="org.example.crm.query.CustomerQuery" resultType="map">
+    select
+        c.name,sum(od.sum) total
+    from
+        t_customer c
+    left join
+            t_customer_order o
+    on
+        c.id = o.cus_id
+    left join
+            t_order_details od
+    on
+        o.id = od.order_id
+    <where>
+      c.is_valid = 1 and c.state = 0 and o.is_valid = 1 and o.state = 1 and od.is_valid = 1
+        <if test="null != customerName and customerName != ''">
+          and c.name like concat('%',#{customerName},'%')
+        </if>
+      <if test="null != time and time != ''">
+        and o.order_date &gt; #{time}
+      </if>
+    </where>
+    group by
+        c.name
+    <if test="null != type">
+      <if test="type==1">
+        having total &gt;=0 and total &lt;=1000
+      </if>
+      <if test="type==2">
+        having total &gt;1000 and total &lt;=3000
+      </if>
+      <if test="type==3">
+        having total &gt;3000 and total &lt;=5000
+      </if>
+      <if test="type==4">
+        having total &gt;5000
+      </if>
+    </if>
+    order by
+        total desc
+  </select>
+
+<!--  查询客户级别构成-->
+  <select id="countCustomerLevelGroup" resultType="map">
+    select
+        d.data_dic_value level, count(1) total
+    from
+        t_customer c
+    left join
+        t_datadic d
+    on
+        c.level = d.id
+    where
+        c.is_valid = 1
+    and
+          c.state = 0
+    group by
+        c.level
+  </select>
+  
 </mapper>

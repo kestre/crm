@@ -141,4 +141,69 @@ public class CustomerService extends BaseService<Customer, Integer> {
             AssertUtil.isTrue(customerMapper.updateCustomerStateByIds(lossCustomerIds) != lossCustomerIds.size(), "客户流失数据转移失败！");
         }
     }
+
+    //    查询客户贡献
+    public Map<String, Object> queryCustomerContributionByParams(CustomerQuery customerQuery) {
+        Map<String, Object> map = new HashMap<>();
+
+        PageHelper.startPage(customerQuery.getPage(), customerQuery.getLimit());
+        PageInfo<Map<String, Object>> pageInfo = new PageInfo<>(customerMapper.queryCustomerContributionByParams(customerQuery));
+
+        map.put("code", 0);
+        map.put("msg", "success");
+        map.put("count", pageInfo.getTotal());
+
+        map.put("data", pageInfo.getList());
+
+        return map;
+    }
+
+    // 查询客户级别构成
+    public Map<String, Object> countCustomerLevelGroup() {
+        Map<String, Object> map = new HashMap<>();
+
+        List<Map<String, Object>> datalist = customerMapper.countCustomerLevelGroup();
+        //折线图x轴
+        List<String> dataX = new ArrayList<>();
+        //折线图y轴
+        List<Integer> dataY = new ArrayList<>();
+
+        if(datalist != null && datalist.size() > 0) {
+            datalist.forEach(stringObjectMap -> {
+                dataX.add(stringObjectMap.get("level").toString());
+                dataY.add(Integer.parseInt(stringObjectMap.get("total").toString()));
+            });
+        }
+        map.put("dataX", dataX);
+        map.put("dataY",dataY);
+
+        return map;
+    }
+
+    //饼状图
+    public Map<String, Object> countCustomerLevelGroup2() {
+        Map<String, Object> map = new HashMap<>();
+
+        List<Map<String, Object>> datalist = customerMapper.countCustomerLevelGroup();
+        //饼状图
+        List<String> data1 = new ArrayList<>();
+        List<Map<String,Object>> data2 = new ArrayList<>();
+
+        if(datalist != null && datalist.size() > 0) {
+            datalist.forEach(stringObjectMap -> {
+                data1.add(stringObjectMap.get("level").toString());
+
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put("name", stringObjectMap.get("level"));
+                map1.put("value", stringObjectMap.get("total"));
+
+                data2.add(map1);
+            });
+        }
+
+        map.put("data1", data1);
+        map.put("data2",data2);
+
+        return map;
+    }
 }

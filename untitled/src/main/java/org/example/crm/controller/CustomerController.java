@@ -92,4 +92,27 @@ public class CustomerController extends BaseController {
     public List<String> getLevels() {
         return customerService.getLevels();
     }
+
+    @RequestMapping("queryCustomerContributionByParams")
+    @ResponseBody
+    public Map<String, Object> queryCustomerContributionByParams(CustomerQuery customerQuery) {
+
+        return customerService.queryCustomerContributionByParams(customerQuery);
+    }
+
+    //折线图
+    @RequestMapping("countCustomerLevelGroup")
+    @ResponseBody
+    public Map<String, Object> countCustomerLevelGroup() {
+
+        return customerService.countCustomerLevelGroup();
+    }
+    //饼状图
+    @RequestMapping("countCustomerLevelGroup2")
+    @ResponseBody
+    public Map<String, Object> countCustomerLevelGroup2() {
+
+        return customerService.countCustomerLevelGroup2();
+    }
+
 }

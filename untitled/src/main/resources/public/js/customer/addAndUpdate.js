@@ -56,27 +56,27 @@ layui.use(['form', 'layer'], function () {
     });
 
     // 渲染客户级别下拉款
-    let level = $("#level").val();
-    // 选择修改页面时，默认选中原始数据的客户级别
-    renderLevel(level);
-    function renderLevel(level) {
-        $.get(
-            "customer/getLevels",
-            {},
-            function (data) {
-                if (level == null || level == '') {
-                    $("[name='level']").eq(0).append(new Option("客户级别", ""));
-                }
-                $.each(data, function (index, element) {
-                    if (element == level) {
-                        $("[name='level']").eq(0).append(new Option(element, element, false,true));
-                    } else {
-                        $("[name='level']").eq(0).append(new Option(element, element));
-                    }
-                });
-                form.render("select");
-            }
-        );
-    }
+    // let level = $("#level").val();
+    // // 选择修改页面时，默认选中原始数据的客户级别
+    // renderLevel(level);
+    // function renderLevel(level) {
+    //     $.get(
+    //         "customer/getLevels",
+    //         {},
+    //         function (data) {
+    //             if (level == null || level == '') {
+    //                 $("[name='level']").eq(0).append(new Option("客户级别", ""));
+    //             }
+    //             $.each(data, function (index, element) {
+    //                 if (element == level) {
+    //                     $("[name='level']").eq(0).append(new Option(element, element, false,true));
+    //                 } else {
+    //                     $("[name='level']").eq(0).append(new Option(element, element));
+    //                 }
+    //             });
+    //             form.render("select");
+    //         }
+    //     );
+    // }
 
 });

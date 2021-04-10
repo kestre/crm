@@ -43,7 +43,14 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">客户级别</label>
                     <div class="layui-input-inline">
-                        <select name="level"></select>
+                        <select name="level" id="level">
+                            <option value="" >请选择</option>
+                            <option value="1">普通客户</option>
+                            <option value="2">重点开发客户</option>
+                            <option value="3">大客户</option>
+                            <option value="4">合作伙伴</option>
+                            <option value="5">战略合作伙伴</option>
+                        </select>
                     </div>
 
                     <label class="layui-form-label">信用度</label>

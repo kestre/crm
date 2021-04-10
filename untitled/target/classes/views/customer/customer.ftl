@@ -18,7 +18,14 @@
 					<input type="text" name="cusNum" class="layui-input searchVal" placeholder="客户编号" />
 				</div>
 				<div class="layui-input-inline">
-					<select name="level" id="level"></select>
+					<select name="level" id="level">
+						<option value="" >请选择</option>
+						<option value="1">普通客户</option>
+						<option value="2">重点开发客户</option>
+						<option value="3">大客户</option>
+						<option value="4">合作伙伴</option>
+						<option value="5">战略合作伙伴</option>
+					</select>
 				</div>
 				<a class="layui-btn search_btn" data-type="reload"><i class="layui-icon">&#xe615;</i>搜索</a>
 			</div>
