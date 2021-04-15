@@ -40,14 +40,14 @@
 				<i class="layui-icon">&#xe608;</i>
 				添加
 			</a>
-			<a class="layui-btn layui-btn-normal delNews_btn layui-bg-green" lay-event="link">
-				<i class="layui-icon">&#xe613;</i>
-				联系人管理
-			</a>
-			<a class="layui-btn layui-btn-normal delNews_btn layui-bg-green" lay-event="record">
-				<i class="layui-icon">&#xe60e;</i>
-				交往记录
-			</a>
+<#--			<a class="layui-btn layui-btn-normal delNews_btn layui-bg-green" lay-event="link">-->
+<#--				<i class="layui-icon">&#xe613;</i>-->
+<#--				联系人管理-->
+<#--			</a>-->
+<#--			<a class="layui-btn layui-btn-normal delNews_btn layui-bg-green" lay-event="record">-->
+<#--				<i class="layui-icon">&#xe60e;</i>-->
+<#--				交往记录-->
+<#--			</a>-->
 			<a class="layui-btn layui-btn-normal delNews_btn layui-bg-orange" lay-event="order">
 				<i class="layui-icon">&#xe63c;</i>
 				订单查看

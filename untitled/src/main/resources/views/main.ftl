@@ -79,6 +79,22 @@
                             </dl>
                         </li>
                     </#if>
+                    <#if permissions?seq_contains("70")>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;" class="layui-menu-tips"><i class="layui-icon">&#xe613;</i><span class="layui-left-nav"> 联系人管理</span> <span class="layui-nav-more"></span></a><dl class="layui-nav-child">
+                                <#if permissions?seq_contains("7010")>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3" data-tab="linkman/index" target="_self"><i class="layui-icon">&#xe613;</i><span class="layui-left-nav"> 联系人列表</span></a>
+                                    </dd>
+                                </#if>
+                                <#if permissions?seq_contains("7020")>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="loss/index" target="_self"><i class="layui-icon">&#xe60e;</i><span class="layui-left-nav"> 交往记录</span></a>
+                                    </dd>
+                                </#if>
+                            </dl>
+                        </li>
+                    </#if>
                     <#if permissions?seq_contains("30")>
                         <li class="layui-nav-item">
                             <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-desktop"></i><span class="layui-left-nav"> 服务管理</span> <span class="layui-nav-more"></span></a>

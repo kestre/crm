@@ -6,13 +6,13 @@
     <body class="childrenBody">
         <form class="layui-form" style="width:80%;">
             <#--id隐藏域-->
-            <input type="hidden" name="id" value="${(saleChance.id)!}">
+            <input type="hidden" name="id" value="${(customerLinkman.id)!}">
             <#--assignMan隐藏域-->
-            <input type="hidden" id="otherAssignMan" value="${(saleChance.assignMan)!}">
+            <input type="hidden" id="otherAssignMan" value="${(customerLinkman.cusId)!}">
             <div class="layui-form-item layui-row layui-col-xs12">
-                <label class="layui-form-label">客户名称</label>
+                <label class="layui-form-label">联系人名字</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" lay-verify="required" name="customerName" id="customerName"  value="${(saleChance.customerName)!}" placeholder="请输入客户名称">
+                    <input type="text" class="layui-input" lay-verify="required" name="linkName" id="customerName"  value="${(customerLinkman.linkName)!}" placeholder="请输入联系人名称">
                 </div>
             </div>
             <div class="layui-form-item layui-row layui-col-xs12">
@@ -69,6 +69,6 @@
                 </div>
             </div>
         </form>
-    <script type="text/javascript" src="js/linkman/addAndUpdate.js"></script>
+    <script type="text/javascript" src="js/saleChance/addAndUpdate.js"></script>
     </body>
 </html>

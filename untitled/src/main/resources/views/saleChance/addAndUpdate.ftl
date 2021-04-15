@@ -69,6 +69,6 @@
                 </div>
             </div>
         </form>
-    <script type="text/javascript" src="js/saleChance/addAndUpdate.js"></script>
+    <script type="text/javascript" src="js/linkman/addAndUpdate.js"></script>
     </body>
 </html>

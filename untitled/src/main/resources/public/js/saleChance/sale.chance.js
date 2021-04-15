@@ -194,8 +194,5 @@ layui.use(['table','layer'],function(){
             // 不允许窗口拉伸
             resize: false
         });
-
     }
-
-
 });
