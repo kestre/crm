@@ -14,6 +14,8 @@
 
 <script src="js/lay-module/formSelects/formSelects-v4.min.js" charset="utf-8"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 <script src="js/lay-config.js" charset="utf-8"></script>
 <script type="text/javascript">
     var serverName="${serverName}";

@@ -61,7 +61,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="t_customer_linkman" domainObjectName="CustomerLinkman"
+        <table tableName="t_customer_contact" domainObjectName="CustomerContact"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 

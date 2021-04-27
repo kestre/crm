@@ -114,5 +114,4 @@ public class CustomerController extends BaseController {
 
         return customerService.countCustomerLevelGroup2();
     }
-
 }

@@ -178,4 +178,11 @@
     where is_valid = 1 and cus_id = #{cutomerId}
     order by order_date desc limit 1
   </select>
+
+  <!--  获得近一个月新增合同数量-->
+  <select id="queryNewCustomerOrderCount" resultType="int">
+    select count(0)
+    from t_customer_order
+    where is_valid = 1 and DATE_ADD(order_date, INTERVAL 1 MONTH ) &gt; NOW()
+  </select>
 </mapper>

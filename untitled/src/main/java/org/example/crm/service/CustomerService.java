@@ -206,4 +206,14 @@ public class CustomerService extends BaseService<Customer, Integer> {
 
         return map;
     }
+
+    // 获得近一个月新增客户数量
+    public int queryNewCustomerCount(){
+        return customerMapper.queryNewCustomerCount();
+    }
+
+    //  获得合作客户数量
+    public int queryCooperateCus() {
+        return customerMapper.queryCooperateCus();
+    }
 }

@@ -9,13 +9,21 @@
 <body class="childrenBody">
 <div class="layui-card card1">
     <div class="layui-row">
-        <div class="layui-col-md6">
+        <div class="layui-col-md3">
             <div class="layui-text">新增客户</div>
-            <div class="layui-text data">0人</div>
+            <div class="layui-text data">${(newCusCount)!}人</div>
         </div>
-        <div class="layui-col-md6">
+        <div class="layui-col-md3">
             <div class="layui-text">联系客户</div>
-            <div class="layui-text data">0次</div>
+            <div class="layui-text data">${(recentContactTime)!}次</div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-text">合作客户</div>
+            <div class="layui-text data">${(cooperateCus)!}人</div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-text">新增合同</div>
+            <div class="layui-text data">${(newOrderCount)!}份</div>
         </div>
     </div>
 </div>

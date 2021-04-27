@@ -36,4 +36,9 @@ public class CustomerOrderService extends BaseService<CustomerOrder, Integer> {
     public Map<String, Object> queryOrderById(Integer orderId) {
         return customerorderMapper.queryOrderById(orderId);
     }
+
+    //  获得近一个月新增合同数量
+    public int queryNewCustomerOrderCount() {
+        return customerorderMapper.queryNewCustomerOrderCount();
+    }
 }

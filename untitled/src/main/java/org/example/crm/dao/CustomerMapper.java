@@ -20,4 +20,10 @@ public interface CustomerMapper extends BaseMapper<Customer, Integer> {
 
     // 查询客户级别构成
     List<Map<String, Object>> countCustomerLevelGroup();
+
+    // 获得近一个月新增客户数量
+    int queryNewCustomerCount();
+
+    //  获得合作客户数量
+    int queryCooperateCus();
 }

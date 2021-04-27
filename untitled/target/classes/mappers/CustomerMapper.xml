@@ -438,5 +438,23 @@
     group by
         c.level
   </select>
-  
+
+<!--  获得近一个月新增客户数量-->
+  <select id="queryNewCustomerCount" resultType="int">
+    select count(0)
+    from t_customer
+    where is_valid = 1 and state = 0 and DATE_ADD(create_date, INTERVAL 1 MONTH ) &gt; NOW()
+  </select>
+
+  <!--  获得合作客户数量-->
+  <select id="queryCooperateCus" resultType="int">
+    select count(0)
+    from t_customer c
+    where is_valid = 1 and state = 0
+      and c.id in (
+      select distinct cus_id
+      from t_customer_order o
+      where is_valid = 1 and o.state = 1 and DATE_ADD(o.order_date, INTERVAL 6 MONTH ) &gt; NOW()
+    )
+  </select>
 </mapper>
