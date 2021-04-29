@@ -114,4 +114,12 @@ public class CustomerController extends BaseController {
 
         return customerService.countCustomerLevelGroup2();
     }
+
+    //  查询所有客户
+    @RequestMapping("queryCustomers")
+    @ResponseBody
+    public List<Map<String, Object>> queryCustomers(){
+
+        return customerService.queryCustomers();
+    }
 }

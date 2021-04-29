@@ -4,16 +4,16 @@ layui.use(['form', 'layer'], function () {
         $ = layui.jquery;
 
     $.post(
-        crm + "/user/queryAllSales",
+        crm + "/customer/queryCustomers",
         {},
         function (data) {
             $.each(data, function (index, element) {
                 // 渲染指派人下拉框
-                let assignMan = $("#otherAssignMan").val();
-                if (element.id == assignMan) {
-                    $("#assignMan").append(new Option(element.uname, element.id, false,true));
+                let cusId = $("#OriginCusId").val();
+                if (element.id == cusId) {
+                    $("#cusId").append(new Option(element.name, element.id, false,true));
                 } else {
-                    $("#assignMan").append(new Option(element.uname, element.id));
+                    $("#cusId").append(new Option(element.name, element.id));
                 }
             });
             // 必须重新渲染下拉框
@@ -30,7 +30,7 @@ layui.use(['form', 'layer'], function () {
     });
 
     // 表单提交监听事件
-    form.on('submit(addOrUpdateSaleChance)', function (data) {
+    form.on('submit(addOrUpdateLinkman)', function (data) {
         // 数据加载遮罩层
         let msg = layer.msg("数据提交中，请稍后", {
             // 图标
@@ -39,14 +39,15 @@ layui.use(['form', 'layer'], function () {
             time: false
         });
 
-        let url = crm + "/saleChance/addSaleChance";
-        let saleChanceId = $("[name='id']").val();
+        let url = crm + "/linkman/add";
+        let linkmanId = $("[name='id']").val();
 
-        if (saleChanceId != null && saleChanceId != '') {
+        if (linkmanId != null && linkmanId != '') {
 
-            url = crm + "/saleChance/updateSaleChance";
+            url = crm + "/linkman/update";
         }
 
+        console.log(data.field)
         // 发送请求
         $.post(
             url,

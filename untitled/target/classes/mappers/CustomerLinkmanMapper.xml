@@ -168,8 +168,22 @@
         and l.gender = #{gender}
       </if>
       <if test="name != null and name != ''">
-        and c.name = #{name}
+        and c.name like concat('%',#{name},'%')
       </if>
     </where>
   </select>
+
+  <!--  批量删除-->
+  <update id="deleteBatch">
+    update
+    t_customer_linkman
+    set
+    is_valid = 0,update_date = now()
+    where
+    id
+    in
+    <foreach collection="array" separator="," open="(" close=")" item="id">
+      #{id}
+    </foreach>
+  </update>
 </mapper>

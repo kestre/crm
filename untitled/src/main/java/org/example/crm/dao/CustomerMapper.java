@@ -26,4 +26,7 @@ public interface CustomerMapper extends BaseMapper<Customer, Integer> {
 
     //  获得合作客户数量
     int queryCooperateCus();
+
+    //  查询所有客户
+    List<Map<String, Object>> queryCustomers();
 }

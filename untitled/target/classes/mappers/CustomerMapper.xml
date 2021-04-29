@@ -457,4 +457,16 @@
       where is_valid = 1 and o.state = 1 and DATE_ADD(o.order_date, INTERVAL 6 MONTH ) &gt; NOW()
     )
   </select>
+
+  <!--查询所有销售人员-->
+  <select id="queryCustomers" resultType="java.util.Map">
+    select
+      id, name
+    from
+      t_customer
+    where
+      is_valid = 1
+      and
+      state = 0
+  </select>
 </mapper>

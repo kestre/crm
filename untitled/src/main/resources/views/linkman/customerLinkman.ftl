@@ -21,8 +21,13 @@
 						<option value="女">女</option>
 					</select>
 				</div>
+<#--				<div class="layui-input-inline">-->
+<#--					<input type="text" name="name" class="layui-input searchVal" placeholder="客户" />-->
+<#--				</div>-->
 				<div class="layui-input-inline">
-					<input type="text" name="name" class="layui-input searchVal" placeholder="客户" />
+					<select name="name" id="cusName" lay-search>
+						<option value="">请选择</option>
+					</select>
 				</div>
 				<a class="layui-btn search_btn" data-type="reload"><i class="layui-icon">&#xe615;</i> 搜索</a>
 			</div>

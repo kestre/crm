@@ -1,9 +1,20 @@
 layui.use(['table','layer'],function() {
-    var layer = parent.layer === undefined ? layui.layer : top.layer,
+    var form = layui.form,
+        layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         table = layui.table;
 
-
+    $.post(
+        crm + "/customer/queryCustomers",
+        {},
+        function (data) {
+            $.each(data, function (index, element) {
+                $("#cusName").append(new Option(element.name, element.name));
+            });
+            // 必须重新渲染下拉框
+            form.render("select");
+        }
+    );
     /**
      * 渲染客户开发计划表格数据
      */
@@ -54,10 +65,7 @@ layui.use(['table','layer'],function() {
                 break;
             // 批量删除事件
             case 'del':
-                // 获取被选中的数据
-                // let checkStatus = table.checkStatus("saleChanceListTable");
                 let checkStatus = table.checkStatus(obj.config.id);
-                // console.log(checkStatus.data);
                 if (checkStatus.data.length < 1) {
                     layer.msg("未选中任何数据", {icon: 5});
                 } else {
@@ -72,11 +80,11 @@ layui.use(['table','layer'],function() {
                     });
                     layer.confirm('选中删除行数：<span style="color: orange">'+checkStatus.data.length+'</span><br/>', {
                         icon: 3,
-                        title: '营销机会管理 - 批量删除'
+                        title: '联系人管理 - 批量删除'
                     }, function (index) {
                         layer.close(index);
                         $.post(
-                            "saleChance/delete?" + ids,
+                            "linkman/delete?" + ids,
                             {},
                             function (data) {
                                 if (data.code == 200) {
@@ -99,17 +107,17 @@ layui.use(['table','layer'],function() {
         switch(obj.event){
             // 修改事件
             case 'edit':
-                openCustomerLinkmanDialog("销售机会管理 - 修改营销机会", "linkman/toAddAndUpdatePage?id=" + obj.data.id);
+                openCustomerLinkmanDialog("联系人管理 - 修改联系人信息", "linkman/toAddAndUpdatePage?id=" + obj.data.id);
                 break;
             // 删除事件
             case 'del':
                 layer.confirm('确认删除？', {
                     icon: 3,
-                    title: '营销机会管理 - 单行删除'
+                    title: '联系人管理 - 单行删除'
                 }, function(index){
                     layer.close(index);
                     $.post(
-                        "saleChance/delete",
+                        "linkman/delete",
                         {
                             ids: obj.data.id
                         },

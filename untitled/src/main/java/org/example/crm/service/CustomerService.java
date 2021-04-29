@@ -216,4 +216,9 @@ public class CustomerService extends BaseService<Customer, Integer> {
     public int queryCooperateCus() {
         return customerMapper.queryCooperateCus();
     }
+
+    //  查询所有客户
+    public List<Map<String, Object>> queryCustomers() {
+        return customerMapper.queryCustomers();
+    }
 }
