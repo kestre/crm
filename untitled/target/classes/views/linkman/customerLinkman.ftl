@@ -25,7 +25,7 @@
 <#--					<input type="text" name="name" class="layui-input searchVal" placeholder="客户" />-->
 <#--				</div>-->
 				<div class="layui-input-inline">
-					<select name="name" id="cusName" lay-filter="cusName" lay-search>
+					<select name="name" id="cusName" lay-search>
 						<option value="">请选择</option>
 					</select>
 				</div>

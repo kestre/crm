@@ -58,6 +58,17 @@ public class UserController extends BaseController {
         return "user/password";
     }
 
+    @RequestMapping("toSettingPage")
+    public String toSettingPage(Integer id, HttpServletRequest request){
+        if( id != null) {
+            User user = userService.selectByPrimaryKey(id);
+
+            request.setAttribute("userModel", user);
+        }
+
+        return "user/setting";
+    }
+
     @RequestMapping("queryAllSales")
     @ResponseBody
     public List<Map<String, Object>> queryAllSales(){
@@ -95,6 +106,13 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResultInfo updateUser(User user){
         userService.updateUser(user);
+        return success("更新成功！");
+    }
+
+    @PostMapping("updateMsg")
+    @ResponseBody
+    public ResultInfo updateMsg(User user){
+        userService.updateMsg(user);
         return success("更新成功！");
     }
 

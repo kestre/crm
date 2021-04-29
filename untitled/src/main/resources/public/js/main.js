@@ -14,9 +14,20 @@ layui.use(['element', 'layer','jquery','layuimini'], function () {
     // 为右侧的下拉框添加页面跳转事件
     $("a[data-iframe-tab]").click(function () {
         url = $(this).attr("data-iframe-tab");
+
         // 编码url
         $.cookie("url", encodeURIComponent(url));
+
+        if( url == "user/toSettingPage") {
+            let id = $('#userId').val();
+            url = url + "?id=" + id;
+            // 编码url
+            $.cookie("url", encodeURIComponent("welcome"));
+        }
+
+
         $('#tabIframe').html('<iframe width="100%" height="100%" frameborder="0"  src=' + url + '></iframe>');
+
     });
 
     // 为左侧的侧边款添加页面跳转事件

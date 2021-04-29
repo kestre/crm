@@ -135,7 +135,7 @@ public class UserService extends BaseService<User, Integer> {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void updateUser(User user) {
+    public void updateMsg(User user) {
 
         AssertUtil.isTrue(null == user.getId(), "待更新记录不存在！");
 
@@ -147,6 +147,12 @@ public class UserService extends BaseService<User, Integer> {
         user.setUpdateDate(new Date());
 
         AssertUtil.isTrue(userMapper.updateByPrimaryKeySelective(user) != 1, "添加失败！");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateUser(User user) {
+
+        updateMsg(user);
 
         relationUserRole(user.getId(), user.getRoleIds());
     }

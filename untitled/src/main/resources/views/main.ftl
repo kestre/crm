@@ -8,6 +8,8 @@
 </head>
 <body class="layui-layout-body layuimini-all">
 <div class="layui-layout layui-layout-admin">
+    <#-- 隐藏域 -->
+    <input id="userId" type="hidden" value="${(user.id)!}"/>
     <div class="layui-header header">
         <div class="layui-logo">
             <a href="javascript:;" data-iframe-tab="welcome" data-title="welcome" >
