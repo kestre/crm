@@ -1,7 +1,8 @@
-layui.use(['echarts','layer'],function() {
+layui.use(['table', 'echarts','layer'],function() {
     var layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
-        echarts = layui.echarts;
+        echarts = layui.echarts,
+        table = layui.table;
 
     $.ajax({
         type:"get",
@@ -103,4 +104,18 @@ layui.use(['echarts','layer'],function() {
 
     })
 
+    var tableIns = table.render({
+        elem: '#saleOrderList', // 表格绑定的ID
+        url : 'user/ist', // 访问数据的地址
+        cellMinWidth : 95,
+        page : false, // 关闭分页
+        height : "full-50",
+        limit : 5,
+        cols : [[
+            {field: "id", title:'排行', sort: true, fixed:"true"},
+            {field: 'linkName', title: '职位', align:'center'},
+            {field: 'gender', title: '业务员',  align:'center'},
+            {field: 'vocation', title: '成交单数', align:'center'}
+        ]]
+    });
 });

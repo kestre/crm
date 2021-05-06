@@ -13,7 +13,7 @@
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, cus_id, order_num, order_date, address, state, is_valid, create_date, update_date
+    id, cus_id, sale_id, order_num, order_date, address, state, is_valid, create_date, update_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,11 +26,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.example.crm.vo.CustomerOrder">
-    insert into t_customer_order (id, cus_id, order_num, 
+    insert into t_customer_order (id, cus_id, sale_id, order_num,
       order_date, address, state, 
       is_valid, create_date, update_date
       )
-    values (#{id,jdbcType=INTEGER}, #{cusId,jdbcType=INTEGER}, #{orderNum,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{cusId,jdbcType=INTEGER}, #{saleId,jdbcType=INTEGER}, #{orderNum,jdbcType=VARCHAR},
       #{orderDate,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{isValid,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
       )
@@ -43,6 +43,9 @@
       </if>
       <if test="cusId != null">
         cus_id,
+      </if>
+      <if test="saleId != null">
+        sale_id,
       </if>
       <if test="orderNum != null">
         order_num,
@@ -73,6 +76,9 @@
       <if test="cusId != null">
         #{cusId,jdbcType=INTEGER},
       </if>
+      <if test="saleId != null">
+        #{saleId,jdbcType=INTEGER},
+      </if>
       <if test="orderNum != null">
         #{orderNum,jdbcType=VARCHAR},
       </if>
@@ -102,6 +108,9 @@
       <if test="cusId != null">
         cus_id = #{cusId,jdbcType=INTEGER},
       </if>
+      <if test="saleId != null">
+        sale_id = #{saleId,jdbcType=INTEGER},
+      </if>
       <if test="orderNum != null">
         order_num = #{orderNum,jdbcType=VARCHAR},
       </if>
@@ -129,7 +138,8 @@
   <update id="updateByPrimaryKey" parameterType="org.example.crm.vo.CustomerOrder">
     update t_customer_order
     set cus_id = #{cusId,jdbcType=INTEGER},
-      order_num = #{orderNum,jdbcType=VARCHAR},
+        sale_id = #{saleId,jdbcType=INTEGER},
+        order_num = #{orderNum,jdbcType=VARCHAR},
       order_date = #{orderDate,jdbcType=TIMESTAMP},
       address = #{address,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},

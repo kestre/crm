@@ -34,14 +34,14 @@
 <div class="layui-row layui-col-space15">
     <div class="layui-col-md6">
         <div class="layui-card">
-            <div class="layui-card-header">客户构成分析</div>
-            <div class="layui-card-body" id="make" style="width: 100%;height: 200px"></div>
+            <div class="layui-card-header">本月 TOP 5</div>
+            <table id="saleOrderList" class="layui-table" lay-filter="saleOrderList"></table>
         </div>
     </div>
     <div class="layui-col-md6">
         <div class="layui-card">
             <div class="layui-card-header">客户构成分析</div>
-            <div class="layui-card-body" id="make" style="width: 100%;height: 200px"></div>
+            <div class="layui-card-body" id="make" style="width: 100%;height: 400px"></div>
         </div>
     </div>
 </div>

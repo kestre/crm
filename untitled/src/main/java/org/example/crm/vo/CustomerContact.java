@@ -1,5 +1,8 @@
 package org.example.crm.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class CustomerContact {
@@ -7,6 +10,10 @@ public class CustomerContact {
 
     private Integer cusId;
 
+    private String customer; //客户名称
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")   // 要求时间字符串的格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date contactTime;
 
     private String address;
@@ -15,8 +22,10 @@ public class CustomerContact {
 
     private Integer isValid;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
 
     public Integer getId() {
@@ -33,6 +42,14 @@ public class CustomerContact {
 
     public void setCusId(Integer cusId) {
         this.cusId = cusId;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public Date getContactTime() {

@@ -132,4 +132,41 @@
     from t_customer_contact
     where is_valid = 1 and DATE_ADD(contact_time, INTERVAL 1 MONTH ) &gt; NOW()
   </select>
+  <!--  多条件查询-->
+  <select id="selectByParams" parameterType="org.example.crm.query.CustomerContactQuery" resultType="org.example.crm.vo.CustomerContact">
+    select
+    l.*, c.name customer
+    from t_customer_contact l
+    left join
+    t_customer c
+    on
+    l.cus_id = c.id
+    <where>
+      l.is_valid = 1 and c.is_valid = 1
+<!--      <if test="linkName != null and linkName != ''">-->
+<!--        and l.link_name = #{linkName}-->
+<!--      </if>-->
+<!--      <if test="gender != null and gender != ''">-->
+<!--        and l.gender = #{gender}-->
+<!--      </if>-->
+      <if test="customer != null and customer != ''">
+        and c.name like concat('%',#{customer},'%')
+      </if>
+    </where>
+  </select>
+
+  <!--  批量删除-->
+  <update id="deleteBatch">
+    update
+    t_customer_contact
+    set
+    is_valid = 0,update_date = now()
+    where
+    id
+    in
+    <foreach collection="array" separator="," open="(" close=")" item="id">
+      #{id}
+    </foreach>
+  </update>
+
 </mapper>

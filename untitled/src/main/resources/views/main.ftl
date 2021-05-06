@@ -13,7 +13,7 @@
     <div class="layui-header header">
         <div class="layui-logo">
             <a href="javascript:;" data-iframe-tab="welcome" data-title="welcome" >
-                <img id="logo" src="images/welcome.jpg" alt="logo" class="layui-circle">
+                <img id="logo" src="images/mm.png" alt="logo" class="layui-circle">
                 <h1>welcome</h1>
             </a>
         </div>
@@ -91,7 +91,7 @@
                                 </#if>
                                 <#if permissions?seq_contains("7020")>
                                     <dd>
-                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="loss/index" target="_self"><i class="layui-icon">&#xe60e;</i><span class="layui-left-nav"> 交往记录</span></a>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="contact/index" target="_self"><i class="layui-icon">&#xe60e;</i><span class="layui-left-nav"> 交往记录</span></a>
                                     </dd>
                                 </#if>
                             </dl>

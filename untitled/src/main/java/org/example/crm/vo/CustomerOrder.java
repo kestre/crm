@@ -9,6 +9,8 @@ public class CustomerOrder {
 
     private Integer cusId;
 
+    private Integer saleId;
+
     private String orderNum;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -40,6 +42,14 @@ public class CustomerOrder {
 
     public void setCusId(Integer cusId) {
         this.cusId = cusId;
+    }
+
+    public Integer getSaleId() {
+        return saleId;
+    }
+
+    public void setSaleId(Integer saleId) {
+        this.saleId = saleId;
     }
 
     public String getOrderNum() {

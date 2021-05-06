@@ -53,7 +53,6 @@ public class CustomerLinkmanService extends BaseService<CustomerLinkman, Integer
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void addLinkman(CustomerLinkman customerLinkman) {
-        System.out.println(customerLinkman.getLinkName());
         checkLinkmanParams(customerLinkman.getLinkName(), customerLinkman.getGender(), customerLinkman.getPhone(), customerLinkman.getCusId());
 
         customerLinkman.setIsValid(1);
